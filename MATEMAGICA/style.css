@@ -45,7 +45,6 @@ button:hover {
 
 /* ====== TELA INICIAL ====== */
 .tela-inicial .container {
-  background: rgba(0, 0, 0, 0.5);
   padding: 50px;
   border-radius: 25px;
 }
