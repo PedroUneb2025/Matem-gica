@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabuleiro - MATEMÁGICA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="tela-tabuleiro">
+  <div class="container-tabuleiro">
+    <h1 class="titulo">TABULEIRO MATEMÁGICO</h1>
+    <div class="info-jogador">
+      <p id="nomeJogadorDisplay"></p>
+      <button class="btn-dado" onclick="jogarDado()">🎲 Jogar Dado</button>
+      <p id="resultadoDado"></p>
+    </div>
+
+    <!-- Tabuleiro -->
+    <div class="tabuleiro" id="tabuleiro">
+      <!-- As 30 casas são geradas automaticamente -->
+    </div>
+
+    <!-- Pergunta -->
+    <div class="tela-pergunta" id="telaPergunta" style="display:none;">
+      <div class="caixa-pergunta">
+        <h2 id="textoPergunta"></h2>
+        <input type="text" id="respostaJogador" placeholder="Digite sua resposta">
+        <div class="botoes-pergunta">
+          <button id="btnConfirmarResposta">Responder</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback -->
+    <div class="feedback" id="feedback" style="display:none;">
+      <h2 id="feedbackTitulo"></h2>
+      <p id="feedbackTexto"></p>
+      <button id="btnContinuar">Continuar</button>
+    </div>
+
+    <!-- Tela Final -->
+    <div class="tela-final" id="telaFinal" style="display:none;">
+      <h1>🎉 Missão cumprida!</h1>
+      <h2>Você chegou ao castelo!</h2>
+      <img src="imagens/castelo.png" alt="Castelo" class="img-castelo">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

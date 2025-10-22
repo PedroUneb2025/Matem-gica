@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escolha seu Personagem - MATEMÁGICA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="tela-personagem">
+  <div class="container">
+    <h1 class="titulo">ESCOLHA SEU PERSONAGEM</h1>
+
+    <div class="input-nome">
+      <label for="nomeJogador">Digite seu nome:</label>
+      <input type="text" id="nomeJogador" placeholder="Seu nome">
+    </div>
+
+    <div class="personagens">
+      <div class="personagem" onclick="selecionarPersonagem('menina')">
+        <img src="imagens/menina.png" alt="Menina">
+        <p>Menina</p>
+      </div>
+
+      <div class="personagem" onclick="selecionarPersonagem('menino')">
+        <img src="imagens/menino.png" alt="Menino">
+        <p>Menino</p>
+      </div>
+
+      <div class="personagem" onclick="selecionarPersonagem('mago')">
+        <img src="imagens/mago.png" alt="Mago">
+        <p>Mago</p>
+      </div>
+
+      <div class="personagem" onclick="selecionarPersonagem('feiticeira')">
+        <img src="imagens/feiticeira.png" alt="Feiticeira">
+        <p>Feiticeira</p>
+      </div>
+    </div>
+
+    <button class="btn-comecar" id="btnComecar" onclick="irParaProfessor()" disabled>Começar</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

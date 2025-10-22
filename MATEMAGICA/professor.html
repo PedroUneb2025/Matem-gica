@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perguntas do Professor - MATEMÁGICA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="tela-professor">
+  <div class="container">
+    <h1 class="titulo">Configuração das Perguntas</h1>
+    <p class="descricao">
+      Insira uma pergunta e a resposta correta para cada casa do tabuleiro (1 a 30).
+    </p>
+
+    <form id="formPerguntas">
+      <div id="perguntasContainer"></div>
+      <button type="button" class="btn-salvar" onclick="salvarPerguntas()">Salvar e Iniciar Jogo</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Cria os 30 campos automaticamente
+    const container = document.getElementById("perguntasContainer");
+    for (let i = 1; i <= 30; i++) {
+      container.innerHTML += `
+        <div class="pergunta-bloco">
+          <h3>Casa ${i}</h3>
+          <input type="text" id="pergunta${i}" placeholder="Pergunta (ex: 5 + 3 = ?)" required>
+          <input type="text" id="resposta${i}" placeholder="Resposta (ex: 8)" required>
+        </div>
+      `;
+    }
+
+    // Salva perguntas no localStorage
+    function salvarPerguntas() {
+      const perguntas = [];
+      for (let i = 1; i <= 30; i++) {
+        const q = document.getElementById(`pergunta${i}`).value.trim();
+        const r = document.getElementById(`resposta${i}`).value.trim();
+        perguntas.push({ pergunta: q, resposta: r });
+      }
+
+      localStorage.setItem("perguntasMatemagica", JSON.stringify(perguntas));
+      alert("Perguntas salvas com sucesso!");
+      window.location.href = "tabuleiro.html"; // Vai para o jogo
+    }
+  </script>
+</body>
+</html>
