@@ -44,10 +44,22 @@ button:hover {
 }
 
 /* ====== TELA INICIAL ====== */
-.tela-inicial .container {
-  padding: 50px;
-  border-radius: 25px;
+.tela-inicial {
+  background-image: url('images/MATEMAGICA.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
+  width: 100%;
+  overflow-y: auto;           /* permite rolar */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;  /* empurra conteúdo para baixo */
+  align-items: center;
+  padding-bottom: 120px;      /* ajusta posição do botão */
 }
+
 
 /* ====== SELEÇÃO DE PERSONAGEM ====== */
 .personagens {
