@@ -5,7 +5,7 @@ function irParaPersonagem() {
   window.location.href = "personagem.html";
 }
 
-function irParaProfessor() {
+function irParaTabuleiro() {
   const nome = document.getElementById("nomeJogador").value.trim();
   if (!nome || !personagemSelecionado) {
     alert("Digite seu nome e selecione um personagem!");
@@ -13,7 +13,8 @@ function irParaProfessor() {
   }
   localStorage.setItem("nomeJogador", nome);
   localStorage.setItem("personagemSelecionado", personagemSelecionado);
-  window.location.href = "professor.html";
+  window.location.href = "tabuleiro.html";
+
 }
 
 /* =====================
@@ -42,6 +43,17 @@ let posicaoAtual = 1;
 let perguntas = [];
 let dadoValor = 0;
 let currentQuestion = null;
+// ============================
+// CARREGAR PERGUNTAS DO JSON
+// ============================
+fetch("fases.json")
+  .then(response => response.json())
+  .then(data => {
+    perguntas = data;
+    localStorage.setItem("perguntasMatemagica", JSON.stringify(data));
+    console.log("✅ Perguntas carregadas com sucesso!");
+  })
+  .catch(error => console.error("❌ Erro ao carregar perguntas:", error));
 
 window.addEventListener('load', function() {
   const nomeDisplay = document.getElementById("nomeJogadorDisplay");
