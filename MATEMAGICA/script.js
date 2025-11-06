@@ -25,8 +25,6 @@ let personagemSelecionado = null;
 function selecionarPersonagem(id) {
   personagemSelecionado = id;
   document.querySelectorAll(".personagem").forEach(p => p.style.border = "none");
-  // Can't use event.currentTarget in static files without passing event; keep simple visual
-  // highlight by matching id
   document.querySelectorAll('.personagem').forEach(function(el){ el.style.boxShadow = ''; });
   const el = Array.from(document.querySelectorAll('.personagem')).find(e=>e.getAttribute('onclick') && e.getAttribute('onclick').includes(id));
   if(el) el.style.boxShadow = '0 12px 28px rgba(107,79,159,0.15)';
@@ -62,7 +60,6 @@ window.addEventListener('load', function() {
     nomeDisplay.textContent = `Jogador: ${nome}`;
     perguntas = JSON.parse(localStorage.getItem("perguntasMatemagica")) || [];
     gerarTabuleiro();
-    // wire up buttons on tabuleiro page
     const btnConfirm = document.getElementById('btnConfirmarResposta');
     if(btnConfirm) btnConfirm.addEventListener('click', function(){ verificarResposta(); });
     const btnContinuar = document.getElementById('btnContinuar');
@@ -74,7 +71,7 @@ function gerarTabuleiro() {
   const tabuleiro = document.getElementById("tabuleiro");
   if (!tabuleiro) return;
 
-  // clear any existing
+ 
   tabuleiro.innerHTML = '';
 
   for (let i = 1; i <= 30; i++) {
@@ -85,7 +82,7 @@ function gerarTabuleiro() {
     tabuleiro.appendChild(casa);
   }
 
-  // place player icon in casa1
+  
   const jogador = document.createElement("div");
   jogador.classList.add("jogador");
   jogador.textContent = "🧙";
@@ -107,7 +104,7 @@ function mostrarPerguntaParaAvanco() {
   const target = Math.min(posicaoAtual + dadoValor, 30);
   const qObj = perguntas[target-1];
   if(!qObj || !qObj.pergunta) {
-    // move directly if no question
+    
     posicaoAtual = target;
     atualizarPosicao();
     if(posicaoAtual >= 30) mostrarVitoria();
@@ -137,7 +134,6 @@ function verificarResposta() {
     mostrarFeedback(true, currentQuestion.q, currentQuestion.a);
     if(posicaoAtual >= 30) setTimeout(mostrarVitoria, 700);
   } else {
-    // incorrect: stay in place (or return to previous)
     mostrarFeedback(false, currentQuestion.q, ans);
   }
 }
@@ -161,7 +157,6 @@ function continuarJogo() {
    POSIÇÃO E VITÓRIA
 ===================== */
 function atualizarPosicao() {
-  // remove jogador from any casa and append to new casa
   document.querySelectorAll('.jogador').forEach(el=>el.remove());
   const casa = document.getElementById(`casa${posicaoAtual}`);
   if(casa) {
