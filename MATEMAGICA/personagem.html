@@ -1,45 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Escolha seu Personagem - MATEMÁGICA</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seu Personagem - MATEMÁGICA</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="tela-personagem">
-  <div class="container">
-    <h1 class="titulo">ESCOLHA SEU PERSONAGEM</h1>
+    <div class="container">
 
-    <div class="input-nome">
-      <label for="nomeJogador">Digite seu nome:</label>
-      <input type="text" id="nomeJogador" placeholder="Seu nome">
+        <div class="selecao-jogadores">
+            <label for="numJogadores">Quantos jogadores vão jogar?</label>
+            <select id="numJogadores" onchange="gerarCamposDeNome()">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <div class="personagens" id="personagensContainer">
+
+            <div class="card-personagem" data-personagem="Cavaleira" onclick="selecionarPersonagem(this, event)">
+                <img src="images/cavaleira.png" alt="Cavaleira">
+                <p class="nome-base-personagem">Cavaleira</p>
+                <div class="input-nome-wrapper" id="inputWrapper-Cavaleira"></div> 
+            </div>
+
+            <div class="card-personagem" data-personagem="Cavaleiro" onclick="selecionarPersonagem(this, event)">
+                <img src="images/cavaleiro.png" alt="Cavaleiro">
+                <p class="nome-base-personagem">Cavaleiro</p>
+                <div class="input-nome-wrapper" id="inputWrapper-Cavaleiro"></div>
+            </div>
+
+            <div class="card-personagem" data-personagem="Mago" onclick="selecionarPersonagem(this, event)">
+                <img src="images/mago.png" alt="Mago">
+                <p class="nome-base-personagem">Mago</p>
+                <div class="input-nome-wrapper" id="inputWrapper-Mago"></div>
+            </div>
+
+            <div class="card-personagem" data-personagem="Princesa" onclick="selecionarPersonagem(this, event)">
+                <img src="images/princesa.png" alt="Princesa">
+                <p class="nome-base-personagem">Princesa</p>
+                <div class="input-nome-wrapper" id="inputWrapper-Princesa"></div>
+            </div>
+        </div>
+
+        <button class="btn-comecar" id="btnComecar" onclick="irParaTabuleiro()" disabled>
+            Começar
+        </button>
     </div>
 
-    <div class="personagens">
-      <div class="personagem" onclick="selecionarPersonagem('Cavaleira')">
-        <img src="images/cavaleira.png" alt="Cavaleira">
-        <p>Cavaleira</p>
-      </div>
-
-      <div class="personagem" onclick="selecionarPersonagem('Cavaleiro')">
-        <img src="images/cavaleiro.png" alt="Cavaleiro">
-        <p>Cavaleiro</p>
-      </div>
-
-      <div class="personagem" onclick="selecionarPersonagem('mago')">
-        <img src="images/mago.png" alt="Mago">
-        <p>Mago</p>
-      </div>
-
-      <div class="personagem" onclick="selecionarPersonagem('Princesa')">
-        <img src="images/princesa.png" alt="Princesa">
-        <p>Princesa</p>
-      </div>
-    </div>
-
-    <button class="btn-comecar" id="btnComecar" onclick="irParaTabuleiro()" disabled>Começar</button>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
