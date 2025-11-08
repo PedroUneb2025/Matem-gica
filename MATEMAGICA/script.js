@@ -29,6 +29,7 @@ function irParaTabuleiro() {
 // TELA DE SELEÇÃO
 // ----------------------------------------------------
 
+<<<<<<< HEAD
 // Função chamada ao mudar o dropdown (select) de número de jogadores
 function gerarCamposDeNome() {
     const select = document.getElementById('numJogadores');
@@ -66,6 +67,18 @@ function gerarCamposDeNome() {
             personagensSelecionados.push('Cavaleira');
         }
     }
+=======
+function selecionarPersonagem(id) {
+  personagemSelecionado = id;
+  document.querySelectorAll(".personagem").forEach(p => p.style.border = "none");
+  document.querySelectorAll('.personagem').forEach(function(el){ el.style.boxShadow = ''; });
+  const el = Array.from(document.querySelectorAll('.personagem')).find(e=>e.getAttribute('onclick') && e.getAttribute('onclick').includes(id));
+  if(el) el.style.boxShadow = '0 12px 28px rgba(107,79,159,0.15)';
+  const input = el ? el.querySelector('input') : null;
+  const name = input ? input.value : 'Jogador';
+  const btn = document.getElementById('btnComecar');
+  if(btn) btn.disabled = false;
+>>>>>>> 08bfa96174a6125a72fb02419df852c60c00b1cc
 }
 
 // Função chamada ao clicar em um Card de Personagem
@@ -197,6 +210,7 @@ window.addEventListener('load', function() {
     }
 
     perguntas = JSON.parse(localStorage.getItem("perguntasMatemagica")) || [];
+<<<<<<< HEAD
     
     if (document.getElementById("tabuleiro")) {
         gerarTabuleiro();
@@ -212,6 +226,14 @@ window.addEventListener('load', function() {
         // const btnContinuar = document.getElementById('btnContinuar');
         // if(btnContinuar) btnContinuar.addEventListener('click', continuarJogo); 
     }
+=======
+    gerarTabuleiro();
+    const btnConfirm = document.getElementById('btnConfirmarResposta');
+    if(btnConfirm) btnConfirm.addEventListener('click', function(){ verificarResposta(); });
+    const btnContinuar = document.getElementById('btnContinuar');
+    if(btnContinuar) btnContinuar.addEventListener('click', function(){ continuarJogo(); });
+  }
+>>>>>>> 08bfa96174a6125a72fb02419df852c60c00b1cc
 });
 
 function atualizarDisplayJogadorAtual() {
@@ -219,6 +241,7 @@ function atualizarDisplayJogadorAtual() {
     const nomeDisplay = document.getElementById("nomeJogadorDisplay"); 
     const btnDado = document.getElementById('btnJogarDado'); 
 
+<<<<<<< HEAD
     if (nomeDisplay) {
         nomeDisplay.textContent = `Vez de: ${jogadorAtual.nome} (${jogadorAtual.personagem} ${jogadorAtual.icone})`;
     }
@@ -226,6 +249,25 @@ function atualizarDisplayJogadorAtual() {
     if (btnDado) {
         btnDado.disabled = false; 
     }
+=======
+ 
+  tabuleiro.innerHTML = '';
+
+  for (let i = 1; i <= 30; i++) {
+    const casa = document.createElement("div");
+    casa.classList.add("casa");
+    casa.textContent = i;
+    casa.id = `casa${i}`;
+    tabuleiro.appendChild(casa);
+  }
+
+  
+  const jogador = document.createElement("div");
+  jogador.classList.add("jogador");
+  jogador.textContent = "🧙";
+  const casa1 = document.getElementById('casa1');
+  if(casa1) casa1.appendChild(jogador);
+>>>>>>> 08bfa96174a6125a72fb02419df852c60c00b1cc
 }
 
 function proximoJogador() {
@@ -279,6 +321,7 @@ function jogarDado() {
 }
 
 function mostrarPerguntaParaAvanco() {
+<<<<<<< HEAD
     const jogadorAtual = jogadoresTabuleiro[jogadorAtualIndex];
     const target = Math.min(jogadorAtual.posicaoAtual + dadoValor, 35);
 
@@ -308,12 +351,31 @@ function mostrarPerguntaParaAvanco() {
         ansInput?.focus?.();
         overlay.style.display = 'flex';
     }
+=======
+  const target = Math.min(posicaoAtual + dadoValor, 30);
+  const qObj = perguntas[target-1];
+  if(!qObj || !qObj.pergunta) {
+    
+    posicaoAtual = target;
+    atualizarPosicao();
+    if(posicaoAtual >= 30) mostrarVitoria();
+    return;
+  }
+  currentQuestion = { target: target, q: qObj.pergunta, a: qObj.resposta };
+  const overlay = document.getElementById('telaPergunta');
+  if(overlay) {
+    document.getElementById('textoPergunta').textContent = `Casa ${target}: ${currentQuestion.q}`;
+    document.getElementById('ansInput')?.focus?.();
+    overlay.style.display = 'flex';
+  }
+>>>>>>> 08bfa96174a6125a72fb02419df852c60c00b1cc
 }
 
 // ----------------------------------------------------
 // PERGUNTAS E RESPOSTAS
 // ----------------------------------------------------
 function verificarResposta() {
+<<<<<<< HEAD
     const jogadorAtual = jogadoresTabuleiro[jogadorAtualIndex];
     const ansInput = document.getElementById('respostaJogador');
     const ans = ansInput ? ansInput.value.trim() : '';
@@ -334,6 +396,21 @@ function verificarResposta() {
         // incorreto: fica no lugar.
         mostrarFeedback(false, currentQuestion.q, currentQuestion.a, jogadorAtual.nome);
     }
+=======
+  const ansInput = document.getElementById('respostaJogador');
+  const ans = ansInput ? ansInput.value.trim() : '';
+  if(!currentQuestion) return;
+  document.getElementById('telaPergunta').style.display = 'none';
+  const correct = (ans === currentQuestion.a) || (Number(ans) === Number(currentQuestion.a));
+  if(correct) {
+    posicaoAtual = currentQuestion.target;
+    atualizarPosicao();
+    mostrarFeedback(true, currentQuestion.q, currentQuestion.a);
+    if(posicaoAtual >= 30) setTimeout(mostrarVitoria, 700);
+  } else {
+    mostrarFeedback(false, currentQuestion.q, ans);
+  }
+>>>>>>> 08bfa96174a6125a72fb02419df852c60c00b1cc
 }
 
 function mostrarFeedback(ok, q, ansCorreta, nomeJogador) {
@@ -359,6 +436,7 @@ function continuarJogo() {
     if (btnDado) btnDado.disabled = false;
 }
 
+<<<<<<< HEAD
 // ----------------------------------------------------
 // POSIÇÃO E VITÓRIA
 // ----------------------------------------------------
@@ -378,6 +456,22 @@ function atualizarPosicao(jogador) {
         jogadorEl.style.left = (rect.left - boardRect.left + 22 + offset) + 'px';
         jogadorEl.style.top = (rect.top - boardRect.top + 22) + 'px';
     }
+=======
+/* =====================
+   POSIÇÃO E VITÓRIA
+===================== */
+function atualizarPosicao() {
+  document.querySelectorAll('.jogador').forEach(el=>el.remove());
+  const casa = document.getElementById(`casa${posicaoAtual}`);
+  if(casa) {
+    const jogador = document.createElement('div');
+    jogador.classList.add('jogador');
+    jogador.textContent = '🧙';
+    casa.appendChild(jogador);
+  }
+  const posLabel = document.getElementById('posLabel');
+  if(posLabel) posLabel.textContent = posicaoAtual;
+>>>>>>> 08bfa96174a6125a72fb02419df852c60c00b1cc
 }
 
 
