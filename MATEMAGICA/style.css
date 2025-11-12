@@ -104,15 +104,15 @@ body {
 .card-personagem {
   background: url('images/moldura.png') no-repeat center center;
   background-size: contain;
-  width: 160px;
-  height: 260px;
+  width: 250px;
+  height: 375px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   cursor: pointer;
   transition: transform 0.2s ease;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
 
   /* Estilo para indicar seleção */
   border: 3px solid transparent;
@@ -129,10 +129,11 @@ body {
 
 .card-personagem:hover {
   transform: scale(1.05);
+  width: px;
 }
 
 .card-personagem img {
-  width: 90px;
+  width: 400px;
   height: auto;
   margin-bottom: 10px;
 }
