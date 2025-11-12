@@ -5,6 +5,7 @@ body {
   font-family: "Comic Sans MS", cursive, sans-serif;
   background-size: cover;
   color: #fff;
+  overflow: hidden;
 
 }
 
@@ -25,7 +26,7 @@ body {
   justify-content: center;
   text-align: center;
   min-height: 100vh;
-  background: url('images/Tabuleiro.png') no-repeat center center fixed;
+  background: url('images/B1.png') no-repeat center center fixed;
   background-size: 100% 100%;
 }
 
@@ -45,7 +46,6 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 
-<<<<<<< HEAD
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -55,17 +55,6 @@ body {
   align-items: center;
   padding-bottom: 120px;
   /* ajusta posição do botão */
-=======
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;     /* mantém conteúdo na parte inferior */
-  align-items: center;
-  padding-bottom: 60px;          /* ajusta a altura do botão */
->>>>>>> 08bfa96174a6125a72fb02419df852c60c00b1cc
 }
 
 /* ====== BOTÃO JOGAR ====== */
@@ -284,8 +273,14 @@ body {
   position: relative;
   width: 1000px;
   /* ajuste conforme o tamanho da sua imagem */
-  height: 600px;
-  margin-top: 20px;
+  background-image: url('images/MAPA.png');
+  background-size: 100% 100%;
+  top: -100px;
+  height: 1100px;
+  width: 1900px;
+  /* ajuste conforme o tamanho da sua imagem */
+
+
 }
 
 .casa {
@@ -310,13 +305,13 @@ body {
 
 /* === POSIÇÕES DAS CASAS (aproximadas para a imagem enviada) === */
 #casa0 {
-  top: 430px;
+  top: 600px;
   left: -230px;
 }
 
 #casa1 {
-  top: 540px;
-  left: -95px;
+  top: 930px;
+  left: 385px;
 }
 
 #casa2 {
@@ -554,17 +549,4 @@ body {
 .img-castelo {
   width: 250px;
   margin-top: 20px;
-<<<<<<< HEAD
 }
-=======
-}
-
-.btn-jogar {
-  animation: flutuar 2s ease-in-out infinite;
-}
-
-@keyframes flutuar {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
->>>>>>> 08bfa96174a6125a72fb02419df852c60c00b1cc
