@@ -39,7 +39,7 @@
       align-items: center;
     }
 
-    /* ====== BOTÕES ====== */
+    /* BOTÕES */
     .botoes-iniciais {
       display: flex;
       gap: 18px;
@@ -57,7 +57,7 @@
       font-weight: bold;
       cursor: pointer;
       border-radius: 28px;
-      border: 6px solid rgb(6, 72, 129); /* azul */
+      border: 6px solid rgb(6, 72, 129);
       box-shadow: 0 0 25px rgb(55, 144, 223);
       transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
       animation: flutuar 2s ease-in-out infinite;
@@ -75,7 +75,7 @@
       50% { transform: translateY(-6px); }
     }
 
-    /* ====== MODAL ====== */
+    /* ========== MODAIS ========== */
     .modal {
       position: fixed;
       inset: 0;
@@ -86,8 +86,30 @@
       z-index: 1000;
     }
 
-    /* Linhas de controles (som / brilho) */
-    .modal .linha {
+    .modal .caixa {
+      width: min(650px, 95vw);
+      padding: 60px;
+      background: rgb(255, 251, 185);
+      color: rgb(0, 0, 0);
+      border-radius: 28px;
+      border: 6px solid rgb(6, 72, 129);
+      box-shadow: 0 0 25px rgb(55, 144, 223);
+      font-size: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal h2 {
+      font-size: 3rem;
+      margin-bottom: 25px;
+      text-align: center;
+      font-weight: bold;
+      color: rgb(0, 0, 0);
+      text-shadow: 2px 2px rgb(255, 255, 255);
+    }
+
+    .linha {
       margin: 12px 0;
       display: flex;
       align-items: center;
@@ -96,123 +118,16 @@
       max-width: 480px;
     }
 
-    .modal .linha label {
-      flex: 0 0 90px;
-      text-align: left;
-      color: rgb(0, 0, 0);
-      font-weight: bold;
-    }
-
-    .modal .linha input[type="range"] {
-      flex: 1;
-    }
-
-    .modal .linha span {
-      width: 70px;
-      text-align: right;
-      color: rgb(0, 0, 0);
-      font-weight: bold;
-    }
-
-    /* ========== MODAL OPÇÕES (MESMO ESTILO DO CRÉDITOS) ========== */
-    #modalOpcoes .caixa {
-      width: min(650px, 95vw);
-      padding: 60px;
-      background: rgb(255, 251, 185); /* amarelo claro */
-      color: rgb(0, 0, 0);
-      border-radius: 28px;
-      border: 6px solid rgb(6, 72, 129); /* azul */
-      box-shadow: 0 0 25px rgb(55, 144, 223);
-      font-size: 1.7rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    #modalOpcoes h2 {
-      font-size: 2.6rem;
-      margin-bottom: 25px;
-      text-align: center;
-      color: rgb(0, 0, 0);
-      font-weight: bold;
-      text-shadow: 2px 2px rgb(255, 255, 255);
-    }
-
-    #modalOpcoes header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 10px;
-      width: 100%;
-    }
-
-    #modalOpcoes #fecharOpcoes {
-      padding: 16px 40px;
-      font-size: 1.6rem;
-    }
-
-    /* ========== MODAL CRÉDITOS (NOVO ESTILO) ========== */
-    #modalCreditos .caixa {
-      width: min(650px, 95vw);
-      padding: 60px;
-      background: rgb(255, 251, 185); /* amarelo claro */
-      color: rgb(0, 0, 0);
-      border-radius: 28px;
-      border: 6px solid rgb(6, 72, 129); /* azul */
-      box-shadow: 0 0 25px rgb(55, 144, 223);
-      font-size: 1.9rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    #modalCreditos h2 {
-      font-size: 3rem;
-      margin-bottom: 35px;
-      text-align: center;
-      color: rgb(0, 0, 0); /* PRETO */
-      font-weight: bold;
-      text-shadow: 2px 2px rgb(255, 255, 255);
-    }
-
-    .grupo {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .grupo p {
-      margin: 6px 0;
-      font-size: 2rem;
-      color: rgb(0, 0, 0);
-    }
-
-    #modalCreditos .btn-fechar-creditos {
-      margin-top: 45px;
-      background-color: rgb(255, 202, 40);
-      color: rgb(0, 0, 0);
-      padding: 20px 60px;
-      font-size: 1.8rem;
-      font-weight: bold;
-      border-radius: 28px;
-      border: 6px solid rgb(6, 72, 129); /* azul */
-      box-shadow: 0 0 25px rgb(55, 144, 223);
-      cursor: pointer;
-      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-      animation: flutuar 2s ease-in-out infinite;
-    }
-
-    #modalCreditos .btn-fechar-creditos:hover {
-      background-color: rgb(255, 241, 118);
-      transform: scale(1.1);
-    }
+    .linha label { width: 120px; }
+    .linha input[type="range"] { flex: 1; }
+    .linha span { width: 60px; text-align: right; font-weight: bold; }
   </style>
 </head>
+
 <body class="tela-inicial">
 
-  <!-- ÁUDIO DE FUNDO: TROQUE O ARQUIVO AQUI -->
-  <!-- Exemplo: audio/musica_matemagica.mp3 -->
-  <audio id="bgm" src="musics/Pelas Estradas Mágicas.mp3" loop></audio>
+  <!-- 🎵 ÁUDIO QUE *DEVE* AUTOPLAY IMEDIATAMENTE -->
+  <audio id="bgm" src="musics/Pelas Estradas Mágicas.mp3" loop autoplay></audio>
 
   <div class="container">
     <div class="botoes-iniciais">
@@ -223,138 +138,106 @@
   </div>
 
   <!-- MODAL OPÇÕES -->
-  <div class="modal" id="modalOpcoes" aria-hidden="true">
+  <div class="modal" id="modalOpcoes">
     <div class="caixa">
-      <header>
-        <h2>Opções</h2>
-        <button class="btn-sec" id="fecharOpcoes">Fechar</button>
-      </header>
+      <h2>Opções</h2>
 
       <div class="linha">
-        <label for="rangeSom">Som</label>
+        <label>Som</label>
         <input type="range" id="rangeSom" min="0" max="100" value="70">
         <span id="valorSom">70%</span>
       </div>
 
       <div class="linha">
-        <label for="rangeBrilho">Brilho</label>
+        <label>Brilho</label>
         <input type="range" id="rangeBrilho" min="50" max="150" value="100">
         <span id="valorBrilho">100%</span>
       </div>
+
+      <button class="btn-sec" id="fecharOpcoes">Fechar</button>
     </div>
   </div>
 
   <!-- MODAL CRÉDITOS -->
-  <div class="modal" id="modalCreditos" aria-hidden="true">
-    <div class="caixa creditos">
-
+  <div class="modal" id="modalCreditos">
+    <div class="caixa">
       <h2>Créditos</h2>
 
-      <div class="grupo">
-        <p><strong>Gestora:</strong></p>
-        <p>Letícia Veras</p>
-      </div>
+      <p><b>Gestora:</b> Letícia Veras</p>
+      <p><b>Design:</b> Larinete Santana</p>
+      <p><b>Programadores:</b> Caick Ruan, Pedro Sérgio</p>
 
-      <div class="grupo">
-        <p><strong>Design:</strong></p>
-        <p>Larinete Santana</p>
-      </div>
-
-      <div class="grupo">
-        <p><strong>Programadores:</strong></p>
-        <p>Caick Ruan</p>
-        <p>Pedro Sérgio</p>
-      </div>
-
-      <button class="btn-fechar-creditos" id="fecharCreditos">Fechar</button>
-
+      <button class="btn-sec" id="fecharCreditos">Fechar</button>
     </div>
   </div>
 
+  <!-- Controles da página -->
   <script>
-    // Navegação para jogar
-    document.getElementById('btnJogar').addEventListener('click', () => {
-      window.location.href = 'personagem.html';
+    const audio = document.getElementById("bgm");
+
+    /* ------------------------------
+       TENTAR AUTOPLAY IMEDIATO
+    --------------------------------*/
+    window.addEventListener("load", () => {
+      const prefs = JSON.parse(localStorage.getItem("mm_prefs") || "{}");
+
+      const volume = (prefs.som !== undefined) ? prefs.som : 70;
+      const brilho = (prefs.brilho !== undefined) ? prefs.brilho : 100;
+
+      document.documentElement.style.filter = 'brightness(' + (brilho / 100) + ')';
+
+      audio.volume = volume / 100;
+
+      audio.play().catch(err => {
+        console.warn("⚠️ Autoplay bloqueado. O navegador exige interação.", err);
+      });
     });
 
-    // Modais
-    const modalOpcoes    = document.getElementById('modalOpcoes');
-    const modalCreditos  = document.getElementById('modalCreditos');
-    const btnOpcoes      = document.getElementById('btnOpcoes');
-    const btnCreditos    = document.getElementById('btnCreditos');
-    const fecharOpcoes   = document.getElementById('fecharOpcoes');
-    const fecharCreditos = document.getElementById('fecharCreditos');
 
-    btnOpcoes.addEventListener('click', () => modalOpcoes.style.display = 'flex');
-    btnCreditos.addEventListener('click', () => modalCreditos.style.display = 'flex');
-
-    fecharOpcoes.addEventListener('click', () => modalOpcoes.style.display = 'none');
-    fecharCreditos.addEventListener('click', () => modalCreditos.style.display = 'none');
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        modalOpcoes.style.display   = 'none';
-        modalCreditos.style.display = 'none';
-      }
-    });
-
-    // ===== SOM E BRILHO FUNCIONAIS =====
-    const rangeSom    = document.getElementById('rangeSom');
-    const rangeBrilho = document.getElementById('rangeBrilho');
-    const valorSom    = document.getElementById('valorSom');
-    const valorBrilho = document.getElementById('valorBrilho');
-    const audio       = document.getElementById('bgm');
-
-    // Carrega preferências salvas (se existirem)
-    const prefs = JSON.parse(localStorage.getItem('mm_prefs') || '{}');
-
-    // Som
-    if (prefs.som !== undefined) {
-      rangeSom.value = prefs.som;
-      valorSom.textContent = prefs.som + '%';
-      if (audio) audio.volume = prefs.som / 100;
-    } else {
-      if (audio) audio.volume = 0.7; // padrão 70%
-    }
-
-    // Brilho
-    if (prefs.brilho !== undefined) {
-      rangeBrilho.value = prefs.brilho;
-      valorBrilho.textContent = prefs.brilho + '%';
-      document.documentElement.style.filter = 'brightness(' + (prefs.brilho / 100) + ')';
-    } else {
-      document.documentElement.style.filter = 'brightness(1)';
-    }
-
-    // Atualiza em tempo real
-    rangeSom.addEventListener('input', () => {
-      const v = parseInt(rangeSom.value);
-      valorSom.textContent = v + '%';
-      if (audio) audio.volume = v / 100;
-      salvarPrefs();
-    });
-
-    rangeBrilho.addEventListener('input', () => {
-      const v = parseInt(rangeBrilho.value);
-      valorBrilho.textContent = v + '%';
-      document.documentElement.style.filter = 'brightness(' + (v / 100) + ')';
-      salvarPrefs();
-    });
+    /* ------------------------------
+       SALVAR PREFERÊNCIAS DE SOM/BRILHO
+    --------------------------------*/
+    const rangeSom = document.getElementById("rangeSom");
+    const rangeBrilho = document.getElementById("rangeBrilho");
+    const valorSom = document.getElementById("valorSom");
+    const valorBrilho = document.getElementById("valorBrilho");
 
     function salvarPrefs() {
-      localStorage.setItem('mm_prefs', JSON.stringify({
+      const prefs = {
         som: parseInt(rangeSom.value),
         brilho: parseInt(rangeBrilho.value)
-      }));
+      };
+      localStorage.setItem("mm_prefs", JSON.stringify(prefs));
     }
 
-    // Inicia o áudio na primeira interação (para navegador não bloquear)
-    document.addEventListener('click', function initAudio() {
-      if (audio) {
-        audio.play().catch(() => {});
-      }
-      document.removeEventListener('click', initAudio);
-    });
+    rangeSom.oninput = () => {
+      valorSom.textContent = rangeSom.value + "%";
+      audio.volume = rangeSom.value / 100;
+      salvarPrefs();
+    };
+
+    rangeBrilho.oninput = () => {
+      valorBrilho.textContent = rangeBrilho.value + "%";
+      document.documentElement.style.filter = 'brightness(' + (rangeBrilho.value / 100) + ')';
+      salvarPrefs();
+    };
+
+    /* ------------------------------
+       MODAIS
+    --------------------------------*/
+    const modalOpcoes = document.getElementById("modalOpcoes");
+    const modalCreditos = document.getElementById("modalCreditos");
+
+    document.getElementById("btnOpcoes").onclick = () => modalOpcoes.style.display = "flex";
+    document.getElementById("btnCreditos").onclick = () => modalCreditos.style.display = "flex";
+
+    document.getElementById("fecharOpcoes").onclick = () => modalOpcoes.style.display = "none";
+    document.getElementById("fecharCreditos").onclick = () => modalCreditos.style.display = "none";
+
+    document.getElementById("btnJogar").onclick = () => {
+      window.location.href = "personagem.html";
+    };
+
   </script>
 
 </body>

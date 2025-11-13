@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="tela-tabuleiro">
-  <!-- 🎵 ÁUDIO DE FUNDO SOMENTE DESTA TELA -->
-  <audio id="bgm" src="musics/Pelas Estradas Mágicas.mp3" loop></audio>
+  <!-- 🎵 ÁUDIO DE FUNDO DESTA TELA -->
+  <audio id="bgm" src="musics/Pelas Estradas Mágicas.mp3" loop preload="auto"></audio>
 
   <div class="container-tabuleiro">
     <div class="info-jogador">
@@ -45,17 +45,19 @@
     </div>
   </div>
 
-  <!-- seu JS de jogo -->
+  <!-- JS do jogo -->
   <script src="script.js"></script>
 
-  <!-- 🎚 Ajuste LOCAL de som / brilho baseado no que foi salvo no início -->
+  <!-- 🎵 CONTINUIDADE DA MÚSICA + BRILHO / VOLUME -->
   <script>
     (function () {
-      const audio = document.getElementById('bgm');
+      const audio = document.getElementById("bgm");
+      if (!audio) return;
 
+      // Lê preferências de som/brilho salvas (mm_prefs)
       let prefs = {};
       try {
-        const stored = localStorage.getItem('mm_prefs');
+        const stored = localStorage.getItem("mm_prefs");
         if (stored) prefs = JSON.parse(stored);
       } catch (e) {
         prefs = {};
@@ -64,18 +66,38 @@
       const volume = (prefs.som !== undefined) ? prefs.som : 70;
       const brilho = (prefs.brilho !== undefined) ? prefs.brilho : 100;
 
-      document.documentElement.style.filter = 'brightness(' + (brilho / 100) + ')';
+      // Aplica brilho na página toda
+      document.documentElement.style.filter = "brightness(" + (brilho / 100) + ")";
 
-      if (audio) {
+      // 🔁 Lê o tempo salvo da música para continuar de onde parou
+      let ultimoTempo = 0;
+      try {
+        const t = localStorage.getItem("musica_tempo");
+        if (t !== null) ultimoTempo = parseFloat(t) || 0;
+      } catch (e) {
+        ultimoTempo = 0;
+      }
+
+      function iniciarAudioContinuo() {
+        audio.currentTime = ultimoTempo;
         audio.volume = volume / 100;
 
-        const startAudio = () => {
-          audio.play().catch(() => {});
-          document.removeEventListener('click', startAudio);
-        };
-
-        document.addEventListener('click', startAudio);
+        audio.play().catch(err => {
+          console.warn("Autoplay bloqueado nesta tela (tabuleiro):", err);
+        });
       }
+
+      if (audio.readyState >= 1) {
+        iniciarAudioContinuo();
+      } else {
+        audio.addEventListener("loadedmetadata", iniciarAudioContinuo);
+      }
+
+      setInterval(() => {
+        try {
+          localStorage.setItem("musica_tempo", audio.currentTime.toString());
+        } catch (e) {}
+      }, 200);
     })();
   </script>
 </body>
