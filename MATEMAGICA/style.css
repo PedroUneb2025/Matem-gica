@@ -85,7 +85,7 @@ body {
 
 /* ====== TELA DE PERSONAGEM (atualizada) ====== */
 .tela-personagem {
-  background: url('images/padrão.png') no-repeat center center fixed;
+  background: url('images/B1.png') no-repeat center center fixed;
   background-size: cover;
   color: #3b2f1e;
   background-size: 100% 100%;
@@ -129,13 +129,15 @@ body {
 
 .card-personagem:hover {
   transform: scale(1.05);
-  width: px;
 }
 
 .card-personagem img {
   width: 400px;
-  height: auto;
-  margin-bottom: 10px;
+  height: 290px;
+  display: block;
+  position: relative;
+  top: 30px;
+  left: 10px;
 }
 
 /* Estilo para o nome base do personagem (Cavaleiro, Mago, etc.) */
@@ -283,7 +285,17 @@ body {
 
 
 }
+.personagens{
+  position: relative;
+  width: 1000px;
+  /* ajuste conforme o tamanho da sua imagem */
+  background-image: url('images/MP.png');
+  background-size: 100% 100%;
+  top: -130px;
+  height: 1100px;
+  width: 1900px;
 
+}
 .casa {
   position: absolute;
   width: 45px;
@@ -406,83 +418,83 @@ body {
 }
 
 #casa20 {
-  top: 190px;
-  left: 770px;
+  top: 590px;
+  left: 1160px;
 }
 
 #casa21 {
-  top: 320px;
-  left: 790px;
+  top: 715px;
+  left: 1175px;
 }
 
 #casa22 {
-  top: 450px;
-  left: 820px;
+  top: 835px;
+  left: 1205px;
 }
 
 #casa23 {
-  top: 515px;
-  left: 980px;
+  top: 900px;
+  left: 1335px;
 }
 
 #casa24 {
-  top: 490px;
-  left: 1180px;
+  top: 885px;
+  left: 1515px;
 }
 
 #casa25 {
-  top: 380px;
-  left: 1320px;
+  top: 775px;
+  left: 1640px;
 }
 
 #casa26 {
-  top: 250px;
-  left: 1325px;
+  top: 645px;
+  left: 1650px;
 }
 
 #casa27 {
-  top: 150px;
-  left: 1185px;
+  top: 550px;
+  left: 1535px;
 }
 
 #casa28 {
-  top: 90px;
-  left: 1000px;
+  top: 490px;
+  left: 1375px;
 }
 
 #casa29 {
-  top: 40px;
-  left: 820px;
+  top: 440px;
+  left: 1205px;
 }
 
 #casa30 {
-  top: -20px;
-  left: 660px;
+  top: 380px;
+  left: 1065px;
 }
 
 #casa31 {
-  top: -130px;
-  left: 610px;
+  top: 280px;
+  left: 1015px;
 }
 
 #casa32 {
-  top: -240px;
-  left: 690px;
+  top: 170px;
+  left: 1085px;
 }
 
 #casa33 {
-  top: -280px;
-  left: 930px;
+  top: 135px;
+  left: 1295px;
 }
 
 #casa34 {
-  top: -200px;
-  left: 1090px;
+  top: 200px;
+  left: 1435px;
 }
 
 #casa35 {
-  top: -50px;
-  left: 1140px;
+  top: 335px;
+ left: 1490px;
 }
 
 
