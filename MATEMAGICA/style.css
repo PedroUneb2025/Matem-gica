@@ -6,7 +6,6 @@ body {
   background-size: cover;
   color: #fff;
   overflow: hidden;
-
 }
 
 .container,
@@ -20,15 +19,10 @@ body {
 }
 
 .container-tabuleiro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 100vh;
   background: url('images/B1.png') no-repeat center center fixed;
   background-size: 100% 100%;
 }
+
 
 /* ====== TÍTULOS ====== */
 .titulo {
@@ -36,7 +30,6 @@ body {
   text-shadow: 3px 3px 5px #000;
   margin-bottom: 20px;
 }
-
 
 
 /* ====== TELA INICIAL ====== */
@@ -51,10 +44,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  /* empurra conteúdo para baixo */
   align-items: center;
   padding-bottom: 120px;
-  /* ajusta posição do botão */
 }
 
 /* ====== BOTÃO JOGAR ====== */
@@ -69,7 +60,7 @@ body {
   cursor: pointer;
   box-shadow: 0 6px #b388ff;
   transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-  margin-bottom: -500px;           /* move o botão mais para baixo */
+  margin-bottom: -500px;
 }
 
 .btn-jogar:hover {
@@ -80,90 +71,97 @@ body {
 
 
 
-
-
-
-/* ====== TELA DE PERSONAGEM (atualizada) ====== */
+/* ====== TELA DE PERSONAGEM ====== */
 .tela-personagem {
   background: url('images/B1.png') no-repeat center center fixed;
-  background-size: cover;
-  color: #3b2f1e;
   background-size: 100% 100%;
+  min-height: 100vh;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #3b2f1e;
 }
 
+/* ======== FUNDO DUPLO COM MP.png ======== */
 .personagens {
+  position: relative;
+  width: 1400px;
+  height: 750px;
+
+  background-image: url('images/MP.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: 40px;
+
+  padding: 30px 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  border-radius: 20px;
 }
 
+
+/* ====== CARDS DE PERSONAGENS ====== */
 .card-personagem {
   background: url('images/moldura.png') no-repeat center center;
   background-size: contain;
   width: 250px;
   height: 375px;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+
   cursor: pointer;
   transition: transform 0.2s ease;
   padding-bottom: 20px;
-
-  /* Estilo para indicar seleção */
   border: 3px solid transparent;
 }
-
-/* Novo estilo para quando um personagem é selecionado */
-.card-personagem.selecionado {
-  border: 3px solid #ffcc00;
-  /* Borda amarela chamativa */
-  box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
-  transform: scale(1.08);
-}
-
 
 .card-personagem:hover {
   transform: scale(1.05);
 }
 
+.card-personagem.selecionado {
+  border: 3px solid #ffcc00;
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+  transform: scale(1.08);
+}
+
 .card-personagem img {
   width: 400px;
   height: 290px;
-  display: block;
   position: relative;
   top: 30px;
   left: 10px;
 }
 
-/* Estilo para o nome base do personagem (Cavaleiro, Mago, etc.) */
+/* Nome abaixo do personagem */
 .nome-base-personagem {
   background: #f3e2b3;
   border: 2px solid #5c442a;
   border-radius: 4px;
   padding: 4px 10px;
   font-weight: bold;
-  font-family: 'Cinzel', serif;
-  margin: 0;
-  color: #3b2f1e;
   margin-bottom: 5px;
-  /* Espaço antes do campo de nome */
-}
-
-/* O .card-personagem p original agora é .nome-base-personagem */
-.card-personagem p {
-  /* Mantém as propriedades herdadas, mas foca no nome base */
-  margin: 0;
   color: #3b2f1e;
 }
 
+.card-personagem p {
+  margin: 0;
+}
 
+
+/* ====== BOTÃO COMEÇAR ====== */
 .btn-comecar {
-  margin-top: 40px;
+  margin-top: 10px;
   background-color: #ffcc00;
   border: none;
   border-radius: 12px;
@@ -180,33 +178,21 @@ body {
   transform: translateY(-2px);
 }
 
-/* Estilo para o botão desabilitado (opcional, mas bom para feedback visual) */
 .btn-comecar:disabled {
   background-color: #cccccc;
   box-shadow: 0 4px 0 #999999;
   cursor: not-allowed;
-  transform: none;
 }
 
 
-/*
- * ========================================
- * 🚀 ESTILOS NOVOS PARA SELEÇÃO DE JOGADORES E NOMES
- * ========================================
- */
 
-/* Container para a seleção de número de jogadores */
+/* ====== SELEÇÃO DE JOGADORES ====== */
 .selecao-jogadores {
   margin-bottom: 30px;
   font-size: 1.3rem;
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   color: #fff;
-  /* Altera a cor do label para contrastar com o fundo do mapa */
-}
-
-.selecao-jogadores label {
-  margin-right: 15px;
 }
 
 .selecao-jogadores select {
@@ -216,24 +202,20 @@ body {
   border: 2px solid #5c442a;
   background-color: #f3e2b3;
   color: #3b2f1e;
-  font-weight: bold;
   cursor: pointer;
 }
 
-/* Wrapper que o JS usa para colocar o campo de nome */
+
+/* Campo de nome */
 .input-nome-wrapper {
   min-height: 40px;
-  /* Garante espaço mesmo sem o campo */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5px;
 }
 
-/* Estilo para o campo de nome da criança abaixo do personagem */
 .input-nome-jogador {
   width: 85%;
-  /* Ajusta para caber dentro do card-personagem */
   padding: 3px 5px;
   border-radius: 4px;
   border: 1px solid #5c442a;
@@ -241,18 +223,11 @@ body {
   font-size: 0.9rem;
   color: #3b2f1e;
   background-color: #fff;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-/* Remove a borda no wrapper dos personagens não selecionados */
-.card-personagem:not(.selecionado) .input-nome-wrapper input {
-  /* Opcional: torna o campo de nome um pouco mais discreto ou indisponível se não selecionado */
-  opacity: 0.7;
 }
 
 
-/* ====== PROFESSOR ====== */
-/* ... (Restante do seu CSS não alterado) ... */
+
+/* ====== TELA DO PROFESSOR ====== */
 .tela-professor .pergunta-bloco {
   background: rgba(0, 0, 0, 0.4);
   border-radius: 15px;
@@ -270,32 +245,20 @@ body {
   margin: 5px;
 }
 
+
+
 /* ====== TABULEIRO ====== */
-/* ... (Restante do seu CSS não alterado) ... */
 .tabuleiro {
   position: relative;
-  width: 1000px;
-  /* ajuste conforme o tamanho da sua imagem */
   background-image: url('images/MAPA.png');
   background-size: 100% 100%;
+  height: 1100px;
+  width: 1900px;
   top: -100px;
-  height: 1100px;
-  width: 1900px;
-  /* ajuste conforme o tamanho da sua imagem */
-
-
 }
-.personagens{
-  position: relative;
-  width: 1000px;
-  /* ajuste conforme o tamanho da sua imagem */
-  background-image: url('images/MP.png');
-  background-size: 100% 100%;
-  top: -130px;
-  height: 1100px;
-  width: 1900px;
 
-}
+
+/* ====== CASAS DO TABULEIRO ====== */
 .casa {
   position: absolute;
   width: 45px;
@@ -307,198 +270,49 @@ body {
   font-weight: bold;
   color: #000;
   border: 2px solid #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.jogador {
-  position: absolute;
-  font-size: 30px;
-  transform: translate(-50%, -50%);
-}
+/* (todas as posições foram mantidas 1:1) */
 
-/* === POSIÇÕES DAS CASAS (aproximadas para a imagem enviada) === */
-#casa0 {
-  top: 820px;
-  left: 270px;
-}
-
-#casa1 {
-  top: 930px;
-  left: 385px;
-}
-
-#casa2 {
-  top: 920px;
-  left: 520px;
-}
-
-#casa3 {
-  top: 840px;
-  left:610px;
-}
-
-#casa4 {
-  top: 725px;
-  left: 565px;
-}
-
-#casa5 {
-  top: 650px;
-  left: 440px;
-}
-
-#casa6 {
-  top: 590px;
-  left: 285px;
-}
-
-#casa7 {
-  top: 465px;
-  left: 195px;
-}
-
-#casa8 {
-  top: 330px;
-  left: 225px;
-}
-
-#casa9 {
-  top: 242px;
-  left: 368px;
-}
-
-#casa10 {
-  top: 210px;
-  left: 565px;
-}
-
-#casa11 {
-  top: 275px;
-  left: 730px;
-}
-
-#casa12 {
-  top: 395px;
-  left: 790px;
-}
-
-#casa13 {
-  top: 523px;
-  left: 774px;
-}
-
-#casa14 {
-  top: 640px;
-  left: 718px;
-}
-
-#casa15 {
-  top: 775px;
-  left: 730px;
-}
-
-#casa16 {
-  top: 849px;
-  left: 885px;
-}
-
-#casa17 {
-  top: 783px;
-  left: 1020px;
-}
-
-#casa18 {
-  top: 655px;
-  left: 905px;
-}
-
-#casa19 {
-  top: 553px;
-  left: 980px;
-}
-
-#casa20 {
-  top: 590px;
-  left: 1160px;
-}
-
-#casa21 {
-  top: 715px;
-  left: 1175px;
-}
-
-#casa22 {
-  top: 835px;
-  left: 1205px;
-}
-
-#casa23 {
-  top: 900px;
-  left: 1335px;
-}
-
-#casa24 {
-  top: 885px;
-  left: 1515px;
-}
-
-#casa25 {
-  top: 775px;
-  left: 1640px;
-}
-
-#casa26 {
-  top: 645px;
-  left: 1650px;
-}
-
-#casa27 {
-  top: 550px;
-  left: 1535px;
-}
-
-#casa28 {
-  top: 490px;
-  left: 1375px;
-}
-
-#casa29 {
-  top: 440px;
-  left: 1205px;
-}
-
-#casa30 {
-  top: 380px;
-  left: 1065px;
-}
-
-#casa31 {
-  top: 280px;
-  left: 1015px;
-}
-
-#casa32 {
-  top: 170px;
-  left: 1085px;
-}
-
-#casa33 {
-  top: 135px;
-  left: 1295px;
-}
-
-#casa34 {
-  top: 200px;
-  left: 1435px;
-}
-
-#casa35 {
-  top: 335px;
- left: 1490px;
-}
+#casa0 { top: 820px; left: 270px; }
+#casa1 { top: 930px; left: 385px; }
+#casa2 { top: 920px; left: 520px; }
+#casa3 { top: 840px; left: 610px; }
+#casa4 { top: 725px; left: 565px; }
+#casa5 { top: 650px; left: 440px; }
+#casa6 { top: 590px; left: 285px; }
+#casa7 { top: 465px; left: 195px; }
+#casa8 { top: 330px; left: 225px; }
+#casa9 { top: 242px; left: 368px; }
+#casa10 { top: 210px; left: 565px; }
+#casa11 { top: 275px; left: 730px; }
+#casa12 { top: 395px; left: 790px; }
+#casa13 { top: 523px; left: 774px; }
+#casa14 { top: 640px; left: 718px; }
+#casa15 { top: 775px; left: 730px; }
+#casa16 { top: 849px; left: 885px; }
+#casa17 { top: 783px; left: 1020px; }
+#casa18 { top: 655px; left: 905px; }
+#casa19 { top: 553px; left: 980px; }
+#casa20 { top: 590px; left: 1160px; }
+#casa21 { top: 715px; left: 1175px; }
+#casa22 { top: 835px; left: 1205px; }
+#casa23 { top: 900px; left: 1335px; }
+#casa24 { top: 885px; left: 1515px; }
+#casa25 { top: 775px; left: 1640px; }
+#casa26 { top: 645px; left: 1650px; }
+#casa27 { top: 550px; left: 1535px; }
+#casa28 { top: 490px; left: 1375px; }
+#casa29 { top: 440px; left: 1205px; }
+#casa30 { top: 380px; left: 1065px; }
+#casa31 { top: 280px; left: 1015px; }
+#casa32 { top: 170px; left: 1085px; }
+#casa33 { top: 135px; left: 1295px; }
+#casa34 { top: 200px; left: 1435px; }
+#casa35 { top: 335px; left: 1490px; }
 
 
-/* ====== PERGUNTA ====== */
+/* ====== TELA PERGUNTA ====== */
 .tela-pergunta {
   position: fixed;
   top: 0;
@@ -519,12 +333,7 @@ body {
   width: 300px;
 }
 
-.caixa-pergunta input {
-  padding: 8px;
-  width: 80%;
-  border-radius: 8px;
-  border: 1px solid #aaa;
-}
+
 
 /* ====== FEEDBACK ====== */
 .feedback {
@@ -545,7 +354,9 @@ body {
   margin-bottom: 15px;
 }
 
-/* ====== TELA FINAL ====== */
+
+
+/* ====== FINAL ====== */
 .tela-final {
   position: fixed;
   top: 0;
@@ -562,4 +373,11 @@ body {
 .img-castelo {
   width: 250px;
   margin-top: 20px;
+}
+
+.icone-personagem {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  pointer-events: none;
 }

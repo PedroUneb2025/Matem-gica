@@ -132,13 +132,17 @@ function validarSelecao() {
 
 // Ícones por personagem
 function obterIcone(personagem) {
+  let caminho = '';
+
   switch (personagem) {
-    case 'Cavaleira': return '🧝‍♀️';
-    case 'Cavaleiro': return '🛡️';
-    case 'Mago':      return '🧙';
-    case 'Princesa':  return '👸';
-    default:          return '♟️';
+    case 'Fada': caminho = 'images/Fada.png'; break;
+    case 'Cavaleiro': caminho = 'images/cavaleiro.png'; break;
+    case 'Mago': caminho = 'images/mago.png'; break;
+    case 'princesa': caminho = 'images/princesa.png'; break;
+    default: caminho = 'images/cavaleira.png'; break;
   }
+  return `<img src="${caminho}" alt="${personagem}" class="icone-personagem">`;
+
 }
 
 /* ============================
@@ -225,7 +229,7 @@ function gerarTabuleiro() {
     const jogadorEl = document.createElement("div");
     jogadorEl.classList.add("jogador");
     jogadorEl.id = `jogador-${jogador.id}`;
-    jogadorEl.textContent = jogador.icone;
+    jogadorEl.innerHTML = jogador.icone;
 
     const casa0 = document.getElementById('casa0');
     if (casa0) casa0.appendChild(jogadorEl);
