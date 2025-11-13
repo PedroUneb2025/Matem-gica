@@ -221,6 +221,7 @@ function gerarTabuleiro() {
     casa.classList.add("casa");
     casa.textContent = i;
     casa.id = `casa${i}`;
+    casa.classList.add("invisivel");
     tabuleiro.appendChild(casa);
   }
 

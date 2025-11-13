@@ -381,3 +381,10 @@ body {
   object-fit: contain;
   pointer-events: none;
 }
+
+.casa.invisivel {
+  background: none !important;
+  border: none !important;
+  color: transparent !important;
+  box-shadow: none !important;
+}
