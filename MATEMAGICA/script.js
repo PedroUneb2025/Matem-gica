@@ -131,7 +131,7 @@ function validarSelecao() {
 }
 
 // Ícones por personagem
-function obterIcone(personagem) {
+function obterIcone(personagem, tipo = "tabuleiro") {
   let caminho = '';
 
   switch (personagem) {
@@ -141,9 +141,16 @@ function obterIcone(personagem) {
     case 'Princesa': caminho = 'images/princesa.png'; break;
     default: caminho = 'images/cavaleira.png'; break;
   }
-  return `<img src="${caminho}" alt="${personagem}" class="icone-personagem">`;
 
+  // classe diferente dependendo de onde o ícone será usado
+  const classe =
+    tipo === "hud"
+      ? "icone-hud"
+      : "icone-personagem"; // tabuleiro (peão)
+
+  return `<img src="${caminho}" alt="${personagem}" class="${classe}">`;
 }
+
 
 /* ============================
    CARREGAR PERGUNTAS DO JSON
@@ -198,15 +205,16 @@ function atualizarDisplayJogadorAtual() {
   const nomeDisplay = document.getElementById("nomeJogadorDisplay");
   const btnDado = document.getElementById('btnJogarDado');
 
-  if (nomeDisplay) {
+    if (nomeDisplay) {
+    const iconeHud = obterIcone(jogadorAtual.personagem, "hud");
+
     nomeDisplay.innerHTML = `
-  Vez de: <strong>${jogadorAtual.nome}</strong>  
-  (${jogadorAtual.personagem}) 
-  ${jogadorAtual.icone}
-`;
-
-
+      Vez de: <strong>${jogadorAtual.nome}</strong>  
+      (${jogadorAtual.personagem}) 
+      ${iconeHud}
+    `;
   }
+
   if (btnDado) btnDado.disabled = false;
 }
 
@@ -221,29 +229,31 @@ function gerarTabuleiro() {
 
   tabuleiro.innerHTML = '';
 
-  // casas 0..35
+  // cria casas 0..35 (posições vêm do CSS: #casa0, #casa1, ... #casa35)
   for (let i = 0; i <= 35; i++) {
     const casa = document.createElement("div");
-    casa.classList.add("casa");
-    casa.textContent = i;
+    casa.classList.add("casa", "invisivel");
     casa.id = `casa${i}`;
-    casa.classList.add("invisivel");
     tabuleiro.appendChild(casa);
   }
 
-  // coloca os jogadores na casa 0
+  // cria os peões dos jogadores
   jogadoresTabuleiro.forEach(jogador => {
     const jogadorEl = document.createElement("div");
     jogadorEl.classList.add("jogador");
     jogadorEl.id = `jogador-${jogador.id}`;
     jogadorEl.innerHTML = jogador.icone;
 
-    const casa0 = document.getElementById('casa0');
-    if (casa0) casa0.appendChild(jogadorEl);
+    // importante: peão vai direto no TABULEIRO, não na casa
+    tabuleiro.appendChild(jogadorEl);
 
+    // começa sempre na casa 0
+    jogador.posicaoAtual = 0;
     atualizarPosicao(jogador);
   });
 }
+
+
 
 /* ============================
    DADO E PERGUNTAS
@@ -353,21 +363,63 @@ function continuarJogo() {
 ===================== */
 function atualizarPosicao(jogador) {
   const jogadorEl = document.getElementById(`jogador-${jogador.id}`);
-  if (!jogadorEl) return;
+  const tabuleiro = document.getElementById('tabuleiro');
+  if (!jogadorEl || !tabuleiro) return;
 
   const casa = document.getElementById(`casa${jogador.posicaoAtual}`);
-  if (casa) {
-    const rect = casa.getBoundingClientRect();
-    const boardRect = document.getElementById('tabuleiro').getBoundingClientRect();
+  if (!casa) return;
 
-    // pequeno deslocamento para múltiplos jogadores na mesma casa
-    const offset = (jogador.id - 1) * 5;
+  const casaRect = casa.getBoundingClientRect();
+  const boardRect = tabuleiro.getBoundingClientRect();
 
-    jogadorEl.style.position = 'absolute';
-    jogadorEl.style.left = (rect.left - boardRect.left + 22 + offset) + 'px';
-    jogadorEl.style.top = (rect.top - boardRect.top + 22) + 'px';
+  // centro da casa
+  const centerX = casaRect.left - boardRect.left + casaRect.width / 2;
+  const centerY = casaRect.top  - boardRect.top  + casaRect.height / 2;
+
+  // pega todos os jogadores que estão nessa mesma casa
+  const mesmos = jogadoresTabuleiro.filter(j => j.posicaoAtual === jogador.posicaoAtual);
+  const idx = mesmos.findIndex(j => j.id === jogador.id);
+  const n = mesmos.length;
+
+  // distância do centro para espalhar (ajuste conforme o tamanho do ícone)
+  const spread = 15; // pixels – pode aumentar se quiser mais afastado
+
+  let offsetX = 0;
+  let offsetY = 0;
+
+  if (n === 1) {
+    // só um jogador nessa casa → fica bem no centro
+    offsetX = 0;
+    offsetY = 0;
+  } else if (n === 2) {
+    // dois jogadores → esquerda e direita
+    offsetX = idx === 0 ? -spread : spread;
+    offsetY = 0;
+  } else if (n === 3) {
+    // três jogadores → dois embaixo, um em cima
+    if (idx === 0) { offsetX = -spread; offsetY = spread; }
+    else if (idx === 1) { offsetX = spread; offsetY = spread; }
+    else { offsetX = 0; offsetY = -spread; }
+  } else {
+    // quatro ou mais → desenha um quadradinho em volta do centro
+    const posicoes = [
+      [-spread, -spread],
+      [ spread, -spread],
+      [-spread,  spread],
+      [ spread,  spread],
+    ];
+    const p = posicoes[idx] || [0, 0];
+    offsetX = p[0];
+    offsetY = p[1];
   }
+
+  jogadorEl.style.position = 'absolute';
+  jogadorEl.style.left = (centerX + offsetX - 30) + 'px';
+  jogadorEl.style.top  = (centerY + offsetY - 30) + 'px';
+
 }
+
+
 
 function mostrarVitoria(nomeVencedor) {
   const tela = document.getElementById('telaFinal');
