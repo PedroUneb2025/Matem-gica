@@ -138,7 +138,7 @@ function obterIcone(personagem) {
     case 'Fada': caminho = 'images/Fada.png'; break;
     case 'Cavaleiro': caminho = 'images/cavaleiro.png'; break;
     case 'Mago': caminho = 'images/mago.png'; break;
-    case 'princesa': caminho = 'images/princesa.png'; break;
+    case 'Princesa': caminho = 'images/princesa.png'; break;
     default: caminho = 'images/cavaleira.png'; break;
   }
   return `<img src="${caminho}" alt="${personagem}" class="icone-personagem">`;
@@ -199,7 +199,13 @@ function atualizarDisplayJogadorAtual() {
   const btnDado = document.getElementById('btnJogarDado');
 
   if (nomeDisplay) {
-    nomeDisplay.textContent = `Vez de: ${jogadorAtual.nome} (${jogadorAtual.personagem} ${jogadorAtual.icone})`;
+    nomeDisplay.innerHTML = `
+  Vez de: <strong>${jogadorAtual.nome}</strong>  
+  (${jogadorAtual.personagem}) 
+  ${jogadorAtual.icone}
+`;
+
+
   }
   if (btnDado) btnDado.disabled = false;
 }
@@ -243,6 +249,11 @@ function gerarTabuleiro() {
    DADO E PERGUNTAS
 ============================ */
 function jogarDado() {
+  if (!jogadoresTabuleiro || jogadoresTabuleiro.length === 0) {
+    alert("Nenhum jogador encontrado. Volte para a tela de seleção e escolha os personagens.");
+    return;
+  }
+
   const btnDado = document.getElementById('btnJogarDado');
   if (btnDado) btnDado.disabled = true;
 
@@ -253,6 +264,7 @@ function jogarDado() {
 
   mostrarPerguntaParaAvanco();
 }
+
 
 function mostrarPerguntaParaAvanco() {
   const jogadorAtual = jogadoresTabuleiro[jogadorAtualIndex];
