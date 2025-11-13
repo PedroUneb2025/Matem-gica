@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MATEMÁGICA</title>
+
+  <style>
+    /* ====== ESTILO GERAL ====== */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background-size: cover;
+      color: rgb(255, 255, 255);
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: center;
+      min-height: 100vh;
+      padding-bottom: 140px;
+    }
+
+    .tela-inicial {
+      background-image: url('images/MATEMAGICA.png');
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    /* BOTÕES */
+    .botoes-iniciais {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-jogar,
+    .btn-sec {
+      background-color: rgb(255, 202, 40);
+      border: none;
+      color: rgb(0, 0, 0);
+      padding: 22px 60px;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 28px;
+      border: 6px solid rgb(6, 72, 129);
+      box-shadow: 0 0 25px rgb(55, 144, 223);
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      animation: flutuar 2s ease-in-out infinite;
+    }
+
+    .btn-jogar:hover,
+    .btn-sec:hover {
+      background-color: rgb(255, 241, 118);
+      transform: scale(1.08);
+      box-shadow: 0 8px rgb(55, 144, 223);
+    }
+
+    @keyframes flutuar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* ========== MODAIS ========== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal .caixa {
+      width: min(650px, 95vw);
+      padding: 60px;
+      background: rgb(255, 251, 185);
+      color: rgb(0, 0, 0);
+      border-radius: 28px;
+      border: 6px solid rgb(6, 72, 129);
+      box-shadow: 0 0 25px rgb(55, 144, 223);
+      font-size: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal h2 {
+      font-size: 3rem;
+      margin-bottom: 25px;
+      text-align: center;
+      font-weight: bold;
+      color: rgb(0, 0, 0);
+      text-shadow: 2px 2px rgb(255, 255, 255);
+    }
+
+    .linha {
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .linha label { width: 120px; }
+    .linha input[type="range"] { flex: 1; }
+    .linha span { width: 60px; text-align: right; font-weight: bold; }
+  </style>
+</head>
+
+<body class="tela-inicial">
+
+  <!-- 🎵 ÁUDIO QUE *DEVE* AUTOPLAY IMEDIATAMENTE -->
+  <audio id="bgm" src="musics/Pelas Estradas Mágicas.mp3" loop autoplay></audio>
+
+  <div class="container">
+    <div class="botoes-iniciais">
+      <button class="btn-jogar" id="btnJogar">JOGAR</button>
+      <button class="btn-sec" id="btnOpcoes">Opções</button>
+      <button class="btn-sec" id="btnCreditos">Créditos</button>
+    </div>
+  </div>
+
+  <!-- MODAL OPÇÕES -->
+  <div class="modal" id="modalOpcoes">
+    <div class="caixa">
+      <h2>Opções</h2>
+
+      <div class="linha">
+        <label>Som</label>
+        <input type="range" id="rangeSom" min="0" max="100" value="70">
+        <span id="valorSom">70%</span>
+      </div>
+
+      <div class="linha">
+        <label>Brilho</label>
+        <input type="range" id="rangeBrilho" min="50" max="150" value="100">
+        <span id="valorBrilho">100%</span>
+      </div>
+
+      <button class="btn-sec" id="fecharOpcoes">Fechar</button>
+    </div>
+  </div>
+
+  <!-- MODAL CRÉDITOS -->
+  <div class="modal" id="modalCreditos">
+    <div class="caixa">
+      <h2>Créditos</h2>
+
+      <p><b>Gestora:</b> Letícia Veras</p>
+      <p><b>Design:</b> Larinete Santana</p>
+      <p><b>Programadores:</b> Caick Ruan, Pedro Sérgio</p>
+
+      <button class="btn-sec" id="fecharCreditos">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Controles da página -->
+  <script>
+    const audio = document.getElementById("bgm");
+
+    /* ------------------------------
+       TENTAR AUTOPLAY IMEDIATO
+    --------------------------------*/
+    window.addEventListener("load", () => {
+      const prefs = JSON.parse(localStorage.getItem("mm_prefs") || "{}");
+
+      const volume = (prefs.som !== undefined) ? prefs.som : 70;
+      const brilho = (prefs.brilho !== undefined) ? prefs.brilho : 100;
+
+      document.documentElement.style.filter = 'brightness(' + (brilho / 100) + ')';
+
+      audio.volume = volume / 100;
+
+      audio.play().catch(err => {
+        console.warn("⚠️ Autoplay bloqueado. O navegador exige interação.", err);
+      });
+    });
+
+
+    /* ------------------------------
+       SALVAR PREFERÊNCIAS DE SOM/BRILHO
+    --------------------------------*/
+    const rangeSom = document.getElementById("rangeSom");
+    const rangeBrilho = document.getElementById("rangeBrilho");
+    const valorSom = document.getElementById("valorSom");
+    const valorBrilho = document.getElementById("valorBrilho");
+
+    function salvarPrefs() {
+      const prefs = {
+        som: parseInt(rangeSom.value),
+        brilho: parseInt(rangeBrilho.value)
+      };
+      localStorage.setItem("mm_prefs", JSON.stringify(prefs));
+    }
+
+    rangeSom.oninput = () => {
+      valorSom.textContent = rangeSom.value + "%";
+      audio.volume = rangeSom.value / 100;
+      salvarPrefs();
+    };
+
+    rangeBrilho.oninput = () => {
+      valorBrilho.textContent = rangeBrilho.value + "%";
+      document.documentElement.style.filter = 'brightness(' + (rangeBrilho.value / 100) + ')';
+      salvarPrefs();
+    };
+
+    /* ------------------------------
+       MODAIS
+    --------------------------------*/
+    const modalOpcoes = document.getElementById("modalOpcoes");
+    const modalCreditos = document.getElementById("modalCreditos");
+
+    document.getElementById("btnOpcoes").onclick = () => modalOpcoes.style.display = "flex";
+    document.getElementById("btnCreditos").onclick = () => modalCreditos.style.display = "flex";
+
+    document.getElementById("fecharOpcoes").onclick = () => modalOpcoes.style.display = "none";
+    document.getElementById("fecharCreditos").onclick = () => modalCreditos.style.display = "none";
+
+    document.getElementById("btnJogar").onclick = () => {
+      window.location.href = "personagem.html";
+    };
+
+  </script>
+
+</body>
+</html>

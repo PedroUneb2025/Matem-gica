@@ -87,8 +87,9 @@ body {
 /* ======== FUNDO DUPLO COM MP.png ======== */
 .personagens {
   position: relative;
-  width: 1400px;
-  height: 750px;
+  width: 1800px;
+  height: 1000px;
+  top: -100px;
 
   background-image: url('images/MP.png');
   background-size: 100% 100%;
@@ -113,6 +114,7 @@ body {
   background-size: contain;
   width: 250px;
   height: 375px;
+  margin: 30px;
 
   display: flex;
   flex-direction: column;
@@ -161,6 +163,11 @@ body {
 
 /* ====== BOTÃO COMEÇAR ====== */
 .btn-comecar {
+  position: fixed;
+  bottom: 150px;   /* distância do rodapé */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;  /* sempre na frente */
   margin-top: 10px;
   background-color: #ffcc00;
   border: none;
@@ -175,7 +182,6 @@ body {
 
 .btn-comecar:hover {
   background-color: #ffd84d;
-  transform: translateY(-2px);
 }
 
 .btn-comecar:disabled {
@@ -188,21 +194,35 @@ body {
 
 /* ====== SELEÇÃO DE JOGADORES ====== */
 .selecao-jogadores {
+  z-index: 9999;
+  position: relative;
+  top: 200px;           
+  left: 0px;
   margin-bottom: 30px;
-  font-size: 1.3rem;
+
+  /* ===== CONTROLE VISUAL DO TEXTO ===== */
+  font-size: 40px;            /* 🔥 AJUSTE O TAMANHO DO TEXTO AQUI */
   font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   color: #fff;
+
+  /* 🔥 CONTORNO DO TEXTO */
+  -webkit-text-stroke: 2px #000;   /* ESPESSURA + COR */
+  -webkit-text-stroke: 2px #000;
+
+  /* Sombras opcionais */
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.8);
 }
 
+
 .selecao-jogadores select {
-  padding: 8px 15px;
-  font-size: 1.2rem;
-  border-radius: 8px;
+  padding: 15px 20px;
+  font-size: 1.6rem;
+  border-radius: 4px;
   border: 2px solid #5c442a;
   background-color: #f3e2b3;
   color: #3b2f1e;
   cursor: pointer;
+
 }
 
 
@@ -225,28 +245,6 @@ body {
   background-color: #fff;
 }
 
-
-
-/* ====== TELA DO PROFESSOR ====== */
-.tela-professor .pergunta-bloco {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 15px;
-  padding: 15px;
-  margin: 10px 0;
-  width: 90%;
-  max-width: 400px;
-}
-
-.tela-professor input {
-  width: 80%;
-  padding: 8px;
-  border-radius: 8px;
-  border: none;
-  margin: 5px;
-}
-
-
-
 /* ====== TABULEIRO ====== */
 .tabuleiro {
   position: relative;
@@ -255,6 +253,16 @@ body {
   height: 1100px;
   width: 1900px;
   top: -250px;
+}
+
+/* peão no tabuleiro */
+.jogador {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  transform: translate(-50%, -90%);   /* centraliza na casa */
+  z-index: 10;
+  pointer-events: none;
 }
 
 
@@ -375,16 +383,27 @@ body {
   margin-top: 20px;
 }
 
+/* ÍCONE DO PEÃO NO TABULEIRO */
 .icone-personagem {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   object-fit: contain;
   pointer-events: none;
+  position: static;   /* sem top/right aqui, o JS já posiciona o peão */
 
-  position: relative;  
-  top: 35px;   /* ↓ ajusta APENAS o ícone, não afeta o texto */
+}
+
+/* ÍCONE DO HUD (TOPO) */
+.icone-hud {
+  width: 100px;          /* pode ser maior */
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  position: relative;
+  top: 20px;             /* se quiser descer um pouquinho */
   right: 30px;
 }
+
 
 
 
