@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="tela-personagem">
+    <!-- 🎵 ÁUDIO DE FUNDO SOMENTE DESTA TELA -->
+    <audio id="bgm" src="musics/Pelas Estradas Mágicas.mp3" loop></audio>
+
     <div class="container">
 
         <div class="selecao-jogadores">
@@ -51,6 +54,41 @@
         </button>
     </div>
 
+    <!-- seu JS de jogo -->
     <script src="script.js"></script>
+
+    <!-- 🎚 Ajuste LOCAL de som / brilho baseado no que foi salvo no início -->
+    <script>
+      (function () {
+        const audio = document.getElementById('bgm');
+
+        // Lê preferências salvas pelo inicio.html (mm_prefs)
+        let prefs = {};
+        try {
+          const stored = localStorage.getItem('mm_prefs');
+          if (stored) prefs = JSON.parse(stored);
+        } catch (e) {
+          prefs = {};
+        }
+
+        const volume = (prefs.som !== undefined) ? prefs.som : 70;   // padrão 70%
+        const brilho = (prefs.brilho !== undefined) ? prefs.brilho : 100; // padrão 100%
+
+        // aplica brilho na página toda
+        document.documentElement.style.filter = 'brightness(' + (brilho / 100) + ')';
+
+        // configura volume e tenta tocar depois de um clique
+        if (audio) {
+          audio.volume = volume / 100;
+
+          const startAudio = () => {
+            audio.play().catch(() => {});
+            document.removeEventListener('click', startAudio);
+          };
+
+          document.addEventListener('click', startAudio);
+        }
+      })();
+    </script>
 </body>
 </html>
