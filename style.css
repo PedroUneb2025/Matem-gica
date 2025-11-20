@@ -110,11 +110,12 @@ body {
 
 /* ====== CARDS DE PERSONAGENS ====== */
 .card-personagem {
+  transform: translateY(-130px); /* sobe o personagem */
   background: url('images/moldura.png') no-repeat center center;
   background-size: contain;
   width: 350px;
   height: 475px;
-  margin: 30px;
+  margin: 20px;
 
   display: flex;
   flex-direction: column;
@@ -125,6 +126,7 @@ body {
   transition: transform 0.2s ease;
   padding-bottom: 0px;
   border: 3px solid transparent;
+
 }
 
 .card-personagem:hover {
@@ -164,7 +166,7 @@ body {
 /* ====== BOTÃO COMEÇAR ====== */
 .btn-comecar {
   position: fixed;
-  bottom: 230px;   /* distância do rodapé */
+  bottom: 10px;   /* distância do rodapé */
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;  /* sempre na frente */
@@ -197,7 +199,7 @@ body {
 .selecao-jogadores {
   z-index: 9999;
   position: relative;
-  top: 200px;           
+  top: 150px;           
   left: 0px;
   margin-bottom: 30px;
 
