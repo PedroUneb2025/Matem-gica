@@ -125,6 +125,74 @@
       align-items: center;
     }
 
+    #modalOpcoes #fecharOpcoes {
+      position: absolute;
+      left: 820px;
+      bottom: 100px;
+      width: 250px;
+      height: 95px;
+      font-size: 28px;
+      padding: 10px;
+      border-radius: 18px;
+      z-index: 10;
+    }
+
+/* ---- FUNDO DO MODAL DE OPÇÕES COM IMAGEM ---- */
+#modalOpcoes .caixa {
+  background: url("images/Opcoes.png") center/cover no-repeat !important;
+  background-color: transparent !important;
+
+  width: 1100px;
+  height: 650px;
+
+  border: none !important;
+  box-shadow: none !important;
+
+  padding-top: 180px;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+/* texto e controles na frente */
+#modalOpcoes h2,
+#modalOpcoes .linha,
+#modalOpcoes button {
+  position: relative;
+  z-index: 5;
+}
+
+    /* ---- FUNDO DO MODAL DE CRÉDITOS COM IMAGEM MAIOR ---- */
+#modalCreditos .caixa {
+  background: url("images/Creditos.png") center/cover no-repeat !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  width: 500px;        /* Aumenta a largura */
+  height:530px;      /* Aumenta a altura */
+  padding-top: 280px;  /* Ajusta o texto para ficar dentro da arte */
+  padding-bottom: 120px;
+}
+
+
+/* texto na frente da imagem */
+#modalCreditos .conteudo-creditos {
+  margin-top: -100px;
+  text-align: center;
+  font-size: 2rem;
+  color: #000;
+  z-index: 5;
+  position: relative;
+}
+
+#modalCreditos #fecharCreditos {
+  margin-top: 40px;
+  z-index: 5;
+  position: relative;
+}
+
+
+
     .modal h2 {
       font-size: 3rem;
       margin-bottom: 25px;
@@ -134,18 +202,46 @@
       text-shadow: 2px 2px rgb(255, 255, 255);
     }
 
-    .linha {
-      margin: 12px 0;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      max-width: 480px;
-    }
+    /* BLOCO .linha CONTROLÁVEL EM PIXELS */
+.linha {
+  position: relative;
+  height: 40px;          /* altura da linha */
+  margin: 20px 0;
+  display: flex;
+  align-items: center;   /* centraliza verticalmente */
+}
 
-    .linha label { width: 120px; }
-    .linha input[type="range"] { flex: 1; }
-    .linha span { width: 60px; text-align: right; font-weight: bold; }
+/* TEXTO (Som / Brilho) */
+.linha label {
+  position: absolute;
+  left: -500px;            /* distância da borda esquerda */
+  top: 200px;
+  transform: translateY(-50%);
+  width: 180px;          /* largura da área do texto */
+  font-size: 40px;       /* tamanho do texto */
+  font-weight: bold;
+  color: #000;
+}
+
+/* SLIDER */
+.linha input[type="range"] {
+  position: absolute;
+  left: -350px;           /* posição do slider */
+  width: 800px;          /* largura do slider */
+  height: 22px;          /* altura do slider */
+  top: 195px;
+}
+
+/* TEXTO DO VALOR (ex: 70%) */
+.linha span {
+  position: absolute;
+  left: 475px;           /* posição do valor */
+  font-size: 26px;       /* tamanho do número */
+  font-weight: bold;
+  color: #000;
+  top: 190px;
+}
+
   </style>
 </head>
 
@@ -167,7 +263,6 @@
   <!-- MODAL OPÇÕES -->
   <div class="modal" id="modalOpcoes">
     <div class="caixa">
-      <h2>Opções</h2>
 
       <div class="linha">
         <label>Som</label>
@@ -186,17 +281,23 @@
   </div>
 
   <!-- MODAL CRÉDITOS -->
-  <div class="modal" id="modalCreditos">
-    <div class="caixa">
-      <h2>Créditos</h2>
+<div class="modal" id="modalCreditos">
+  <div class="caixa">
 
-      <p><b>Gestora:</b> Letícia Veras</p>
-      <p><b>Design:</b> Larinete Santana</p>
-      <p><b>Programadores:</b> Caick Ruan, Pedro Sérgio</p>
-
-      <button class="btn-sec" id="fecharCreditos">Fechar</button>
+    <div class="conteudo-creditos">
+      <b><h3>Gestora:</h3></b>
+      <p>Letícia Veras</p>
+      <p><b><h3>Design:</h3></b></p>
+      <p>Larinete Xavier</p>
+      <p><b><h3>Programadores:</h3></b></p>
+      <p>Caick Ruan, Pedro Sérgio</p>
     </div>
+
+    <button class="btn-sec" id="fecharCreditos">Fechar</button>
+
   </div>
+</div>
+
 
   <!-- Controles da página -->
   <script>
