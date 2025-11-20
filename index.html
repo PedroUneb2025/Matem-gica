@@ -321,6 +321,29 @@
       });
     });
 
+        // 🔊 Garante que a música começa na PRIMEIRA interação do usuário
+    function iniciarMusicaAoInteragir() {
+      if (!audio) return;
+
+      // tenta tocar só se ainda estiver pausado
+      if (audio.paused) {
+        audio.play().catch(err => {
+          console.warn("Ainda não foi possível tocar o áudio:", err);
+        });
+      }
+
+      // remove os listeners depois da primeira tentativa bem-sucedida
+      window.removeEventListener("click", iniciarMusicaAoInteragir);
+      window.removeEventListener("keydown", iniciarMusicaAoInteragir);
+      window.removeEventListener("touchstart", iniciarMusicaAoInteragir);
+    }
+
+    // qualquer clique, toque ou tecla libera a música
+    window.addEventListener("click", iniciarMusicaAoInteragir);
+    window.addEventListener("keydown", iniciarMusicaAoInteragir);
+    window.addEventListener("touchstart", iniciarMusicaAoInteragir);
+
+
 
     /* ------------------------------
        SALVAR PREFERÊNCIAS DE SOM/BRILHO
