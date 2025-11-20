@@ -87,8 +87,8 @@ body {
 /* ======== FUNDO DUPLO COM MP.png ======== */
 .personagens {
   position: relative;
-  width: 1800px;
-  height: 1000px;
+  width: 2300px;
+  height: 1200px;
   top: -100px;
 
   background-image: url('images/MP.png');
@@ -112,8 +112,8 @@ body {
 .card-personagem {
   background: url('images/moldura.png') no-repeat center center;
   background-size: contain;
-  width: 250px;
-  height: 375px;
+  width: 350px;
+  height: 475px;
   margin: 30px;
 
   display: flex;
@@ -123,7 +123,7 @@ body {
 
   cursor: pointer;
   transition: transform 0.2s ease;
-  padding-bottom: 20px;
+  padding-bottom: 0px;
   border: 3px solid transparent;
 }
 
@@ -138,8 +138,8 @@ body {
 }
 
 .card-personagem img {
-  width: 400px;
-  height: 290px;
+  width: 520px;
+  height: 390px;
   position: relative;
   top: 30px;
   left: 10px;
@@ -164,19 +164,20 @@ body {
 /* ====== BOTÃO COMEÇAR ====== */
 .btn-comecar {
   position: fixed;
-  bottom: 150px;   /* distância do rodapé */
+  bottom: 230px;   /* distância do rodapé */
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;  /* sempre na frente */
   margin-top: 10px;
-  background-color: #ffcc00;
+  background-color: rgb(255, 202, 40);
   border: none;
-  border-radius: 12px;
-  padding: 24px 56px;
-  font-size: 1.2rem;
+  border-radius: 20px;
+  padding: 32px 72px;
+  font-size: 1.6rem;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 0 #b89f00;
+  border: 6px solid rgb(6, 72, 129);
+  box-shadow: 0 0 25px rgb(55, 144, 223);
   transition: all 0.2s;
 }
 
@@ -379,9 +380,69 @@ body {
 }
 
 .img-castelo {
-  width: 250px;
-  margin-top: 20px;
+  width: 600px;
+  margin-top: 20 0px;
 }
+
+/* Personagem vencedor na tela final */
+.vencedor-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 0 0;
+}
+
+.img-vencedor {
+  width: 220px;           /* tamanho do personagem */
+  height: auto;
+  animation: entrarCastelo 2.5s ease forwards;
+}
+
+/* Animação do personagem entrando */
+@keyframes entrarCastelo {
+  0% {
+    transform: translateY(80px) scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(-10px) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* CONFETES NA TELA FINAL */
+.confetes-container {
+  position: absolute;
+  inset: 0;              /* ocupa a tela toda */
+  pointer-events: none;  /* não atrapalha clique */
+  overflow: hidden;
+  z-index: 5;
+}
+
+.confete {
+  position: absolute;
+  width: 10px;
+  height: 18px;
+  border-radius: 3px;
+  opacity: 0.9;
+  animation-name: cairConfete;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes cairConfete {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotateZ(0deg);
+  }
+  100% {
+    transform: translate3d(0, 110vh, 0) rotateZ(360deg);
+  }
+}
+
 
 /* ÍCONE DO PEÃO NO TABULEIRO */
 .icone-personagem {
@@ -445,3 +506,64 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 0 #b89f00;
 }
+
+/* bloco horizontal castelo + personagem */
+.final-content {
+  position: relative;
+  width: 600px;         /* ajuste para caber as duas imagens */
+  height: 350px;        /* ajuste conforme o tamanho */
+  margin-top: 10px;
+
+}
+
+.img-castelo {
+  position: absolute;
+  left: -100px;
+  bottom: -250px;
+  width: 800px;
+  z-index: 1;
+}
+
+.img-vencedor {
+  position: absolute;
+  left: 310px;        /* ajusta para encostar na porta do castelo */
+  bottom: 5px;       /* ajusta altura */
+  width: 120px;       /* tamanho menor */
+  z-index: 2;         /* fica na frente */
+}
+
+
+/* animação de entrada lateral */
+@keyframes entrarLateral {
+  0% {
+    transform: translate(-200px, 30px) scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 30px) scale(1);
+    opacity: 1;
+  }
+
+}
+#tituloFinal {
+  position: absolute;      /* permite mover livremente */
+  left: 50%;               /* move pra esquerda/direita */
+  top: 50px;               /* move pra cima/baixo */
+  transform: translateX(-50%); /* centraliza se quiser */
+  z-index: 5;              /* fica acima do castelo */
+  font-size: 60px;     /* AQUI você muda o tamanho */
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+#textoVencedor {
+  position: absolute;
+  left: 50%;
+  top: 850px;         /* mova como quiser! */
+  transform: translateX(-50%);
+  z-index: 5;
+  font-size: 48px;     /* AQUI você muda o tamanho */
+  font-weight: bold;
+  white-space: nowrap;
+}
+

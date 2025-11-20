@@ -155,14 +155,29 @@ function obterIcone(personagem, tipo = "tabuleiro") {
 /* ============================
    CARREGAR PERGUNTAS DO JSON
 ============================ */
+/* ============================
+   CARREGAR PERGUNTAS DO JSON
+============================ */
 fetch("fases.json")
   .then(response => response.json())
   .then(data => {
-    perguntas = data;
-    localStorage.setItem("perguntasMatemagica", JSON.stringify(data));
-    console.log("✅ Perguntas carregadas com sucesso!");
+    // garante que só salva se for array válido
+    perguntas = Array.isArray(data) ? data : [];
+
+    // se o arquivo estiver vazio, limpa o localStorage
+    if (perguntas.length === 0) {
+      localStorage.removeItem("perguntasMatemagica");
+      console.warn("⚠️ fases.json vazio. Perguntas removidas.");
+    } else {
+      localStorage.setItem("perguntasMatemagica", JSON.stringify(perguntas));
+      console.log("✅ Perguntas carregadas com sucesso!");
+    }
   })
-  .catch(error => console.error("❌ Erro ao carregar perguntas:", error));
+  .catch(error => {
+    console.error("❌ Erro ao carregar perguntas:", error);
+    localStorage.removeItem("perguntasMatemagica"); // impede perguntas antigas
+    perguntas = [];
+  });
 
 /* ============================
    BOOT: detectar tela e iniciar
@@ -421,14 +436,80 @@ function atualizarPosicao(jogador) {
 
 
 
-function mostrarVitoria(nomeVencedor) {
+function mostrarVitoria() {
   const tela = document.getElementById('telaFinal');
-  if (tela) {
-    const spanNome = document.getElementById('vencedorNome');
-    if (spanNome) spanNome.textContent = nomeVencedor;
-    tela.style.display = 'block';
+  if (tela) tela.style.display = 'flex';
+
+  const infoJogador = document.querySelector('.info-jogador');
+  if (infoJogador) infoJogador.style.display = 'none';
+
+  const btnDado = document.getElementById('btnJogarDado');
+  if (btnDado) btnDado.style.display = 'none';
+
+  const resultadoDado = document.getElementById('resultadoDado');
+  if (resultadoDado) resultadoDado.style.display = 'none';
+
+  const telaPergunta = document.getElementById('telaPergunta');
+  if (telaPergunta) telaPergunta.style.display = 'none';
+
+  const feedback = document.getElementById('feedback');
+  if (feedback) feedback.style.display = 'none';
+
+  const tabuleiro = document.getElementById('tabuleiro');
+  if (tabuleiro) {
+    tabuleiro.style.pointerEvents = 'none';
+    tabuleiro.style.opacity = '0.15';
+  }
+
+  // 🔥 PEGAR O JOGADOR VENCEDOR
+  const vencedor = jogadoresTabuleiro[jogadorAtualIndex];
+
+  // 🔥 COLOCAR NOME DO VENCEDOR NA TELA
+  const texto = document.getElementById('textoVencedor');
+  if (texto) texto.textContent = `${vencedor.nome} venceu!`;
+
+  // 🔥 COLOCAR IMAGEM DO PERSONAGEM NA TELA FINAL
+  const imgVencedor = document.getElementById('imgVencedor');
+
+  switch (vencedor.personagem) {
+    case 'Fada':
+      imgVencedor.src = "images/Fada.png";
+      break;
+    case 'Cavaleiro':
+      imgVencedor.src = "images/cavaleiro.png";
+      break;
+    case 'Princesa':
+      imgVencedor.src = "images/princesa.png";
+      break;
+    case 'Mago':
+      imgVencedor.src = "images/mago.png";
+      break;
+    default:
+      imgVencedor.src = "images/cavaleiro.png";
+  }
+
+  // 🔥 iniciar confetes
+  const container = document.getElementById('confetesContainer');
+  if (!container) return;
+
+  const cores = ['#ffeb3b', '#ff4081', '#7c4dff', '#4caf50', '#03a9f4'];
+
+  for (let i = 0; i < 80; i++) {
+    const confete = document.createElement('div');
+    confete.classList.add('confete');
+
+    confete.style.left = Math.random() * 100 + 'vw';
+    confete.style.top = (Math.random() * -20) + 'vh';
+    confete.style.backgroundColor = cores[Math.floor(Math.random() * cores.length)];
+    confete.style.animationDuration = (2 + Math.random() * 3) + 's';
+    confete.style.animationDelay = (Math.random() * 2) + 's';
+
+    container.appendChild(confete);
   }
 }
+
+
+
 
 /* =====================
    AUTO na tela de seleção

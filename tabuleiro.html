@@ -38,12 +38,24 @@
     </div>
 
     <!-- Tela Final -->
-    <div class="tela-final" id="telaFinal" style="display:none;">
-      <h1>🎉 Missão cumprida!</h1>
-      <h2>Você chegou ao castelo!</h2>
+<div class="tela-final" id="telaFinal" style="display:none;">
+
+  <!-- confetes -->
+  <div id="confetesContainer" class="confetes-container"></div>
+
+  <h1 id="tituloFinal">🎉 Missão cumprida!</h1>
+
+  <!-- Área com castelo + vencedor lado a lado -->
+  <div class="final-content">
       <img src="images/castelo.png" alt="Castelo" class="img-castelo">
-    </div>
+      <img id="imgVencedor" class="img-vencedor" src="" alt="Vencedor">
   </div>
+
+  <h2 id="textoVencedor">Você chegou ao castelo!</h2>
+
+</div>
+
+
 
   <!-- JS do jogo -->
   <script src="script.js"></script>
