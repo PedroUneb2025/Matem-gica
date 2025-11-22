@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,11 +21,11 @@
     }
 
     .img-topo {
-      width: 1800px;
-      height: 980PX;
+      width: 2000px;
+      height: 1000PX;
       position: absolute;
       top: 0;
-      left: auto;
+      left: -60px;
 
       background-image: url('images/IN.png') no-repeat center;
       background-repeat: no-repeat;
@@ -43,6 +44,7 @@
 
     .container {
       display: flex;
+      background: transparent !important;
       flex-direction: column;
       align-items: center;
       justify-content: flex-end;
@@ -70,41 +72,76 @@
       gap: 18px;
       flex-wrap: wrap;
       justify-content: center;
+      background: transparent !important;
     }
 
     .btn-jogar,
     .btn-sec {
-      background-color: rgb(255, 202, 40);
+      width: 200px;
+      height: 300px;
+      background-image: url('images/botao1.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+
       border: none;
-      color: rgb(0, 0, 0);
-      padding: 22px 60px;
-      font-size: 2rem;
-      font-weight: bold;
       cursor: pointer;
-      border-radius: 28px;
-      border: 6px solid rgb(6, 72, 129);
+      font-size: 2.0rem;
+      font-weight: bold;
+      color: #ffff;
+      text-shadow: 2px 2px 4px #000;
+      transition: transform 0.2s;
+
+      transition: transform 0.3s ease;
+      ;
       box-shadow: 0 0 25px rgb(55, 144, 223);
-      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+
       animation: flutuar 2s ease-in-out infinite;
     }
 
-    .btn-jogar:hover,
-    .btn-sec:hover {
-      background-color: rgb(255, 241, 118);
-      transform: scale(1.08);
-      box-shadow: 0 8px rgb(55, 144, 223);
+    .btn-jogar,
+    .btn-sec {
+      width: 200px;
+      height: 200px;
+
+      background-image: url('images/botao1.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      background-color: transparent !important;
+      /* REMOVE O FUNDO BRANCO */
+
+      border: none;
+      cursor: pointer;
+      font-size: 2.0rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 2px 2px 4px #000;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 25px rgb(55, 144, 223);
+
+      animation: flutuar 2s ease-in-out infinite;
     }
 
+
     @keyframes flutuar {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
     }
 
     /* ========== MODAIS ========== */
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0, 0, 0, 0.7);
       display: none;
       align-items: center;
       justify-content: center;
@@ -137,59 +174,62 @@
       z-index: 10;
     }
 
-/* ---- FUNDO DO MODAL DE OPÇÕES COM IMAGEM ---- */
-#modalOpcoes .caixa {
-  background: url("images/Opcoes.png") center/cover no-repeat !important;
-  background-color: transparent !important;
+    /* ---- FUNDO DO MODAL DE OPÇÕES COM IMAGEM ---- */
+    #modalOpcoes .caixa {
+      background: url("images/Opcoes.png") center/cover no-repeat !important;
+      background-color: transparent !important;
 
-  width: 1100px;
-  height: 650px;
+      width: 1100px;
+      height: 650px;
 
-  border: none !important;
-  box-shadow: none !important;
+      border: none !important;
+      box-shadow: none !important;
 
-  padding-top: 180px;
-  padding-left: 80px;
-  padding-right: 80px;
-}
+      padding-top: 180px;
+      padding-left: 80px;
+      padding-right: 80px;
+    }
 
-/* texto e controles na frente */
-#modalOpcoes h2,
-#modalOpcoes .linha,
-#modalOpcoes button {
-  position: relative;
-  z-index: 5;
-}
+    /* texto e controles na frente */
+    #modalOpcoes h2,
+    #modalOpcoes .linha,
+    #modalOpcoes button {
+      position: relative;
+      z-index: 5;
+    }
 
     /* ---- FUNDO DO MODAL DE CRÉDITOS COM IMAGEM MAIOR ---- */
-#modalCreditos .caixa {
-  background: url("images/Creditos.png") center/cover no-repeat !important;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+    #modalCreditos .caixa {
+      background: url("images/Creditos.png") center/cover no-repeat !important;
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
 
-  width: 500px;        /* Aumenta a largura */
-  height:530px;      /* Aumenta a altura */
-  padding-top: 280px;  /* Ajusta o texto para ficar dentro da arte */
-  padding-bottom: 120px;
-}
+      width: 500px;
+      /* Aumenta a largura */
+      height: 530px;
+      /* Aumenta a altura */
+      padding-top: 280px;
+      /* Ajusta o texto para ficar dentro da arte */
+      padding-bottom: 120px;
+    }
 
 
-/* texto na frente da imagem */
-#modalCreditos .conteudo-creditos {
-  margin-top: -100px;
-  text-align: center;
-  font-size: 2rem;
-  color: #000;
-  z-index: 5;
-  position: relative;
-}
+    /* texto na frente da imagem */
+    #modalCreditos .conteudo-creditos {
+      margin-top: -100px;
+      text-align: center;
+      font-size: 2rem;
+      color: #000;
+      z-index: 5;
+      position: relative;
+    }
 
-#modalCreditos #fecharCreditos {
-  margin-top: 40px;
-  z-index: 5;
-  position: relative;
-}
+    #modalCreditos #fecharCreditos {
+      margin-top: 40px;
+      z-index: 5;
+      position: relative;
+    }
 
 
 
@@ -203,45 +243,54 @@
     }
 
     /* BLOCO .linha CONTROLÁVEL EM PIXELS */
-.linha {
-  position: relative;
-  height: 40px;          /* altura da linha */
-  margin: 20px 0;
-  display: flex;
-  align-items: center;   /* centraliza verticalmente */
-}
+    .linha {
+      position: relative;
+      height: 40px;
+      /* altura da linha */
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      /* centraliza verticalmente */
+    }
 
-/* TEXTO (Som / Brilho) */
-.linha label {
-  position: absolute;
-  left: -500px;            /* distância da borda esquerda */
-  top: 200px;
-  transform: translateY(-50%);
-  width: 180px;          /* largura da área do texto */
-  font-size: 40px;       /* tamanho do texto */
-  font-weight: bold;
-  color: #000;
-}
+    /* TEXTO (Som / Brilho) */
+    .linha label {
+      position: absolute;
+      left: -500px;
+      /* distância da borda esquerda */
+      top: 200px;
+      transform: translateY(-50%);
+      width: 180px;
+      /* largura da área do texto */
+      font-size: 40px;
+      /* tamanho do texto */
+      font-weight: bold;
+      color: #000;
+    }
 
-/* SLIDER */
-.linha input[type="range"] {
-  position: absolute;
-  left: -350px;           /* posição do slider */
-  width: 800px;          /* largura do slider */
-  height: 22px;          /* altura do slider */
-  top: 195px;
-}
+    /* SLIDER */
+    .linha input[type="range"] {
+      position: absolute;
+      left: -350px;
+      /* posição do slider */
+      width: 800px;
+      /* largura do slider */
+      height: 22px;
+      /* altura do slider */
+      top: 195px;
+    }
 
-/* TEXTO DO VALOR (ex: 70%) */
-.linha span {
-  position: absolute;
-  left: 475px;           /* posição do valor */
-  font-size: 26px;       /* tamanho do número */
-  font-weight: bold;
-  color: #000;
-  top: 190px;
-}
-
+    /* TEXTO DO VALOR (ex: 70%) */
+    .linha span {
+      position: absolute;
+      left: 475px;
+      /* posição do valor */
+      font-size: 26px;
+      /* tamanho do número */
+      font-weight: bold;
+      color: #000;
+      top: 190px;
+    }
   </style>
 </head>
 
@@ -254,8 +303,8 @@
 
   <div class="container">
     <div class="botoes-iniciais">
-      <button class="btn-jogar" id="btnJogar">JOGAR</button>
       <button class="btn-sec" id="btnOpcoes">Opções</button>
+      <button class="btn-jogar" id="btnJogar">JOGAR</button>
       <button class="btn-sec" id="btnCreditos">Créditos</button>
     </div>
   </div>
@@ -281,22 +330,28 @@
   </div>
 
   <!-- MODAL CRÉDITOS -->
-<div class="modal" id="modalCreditos">
-  <div class="caixa">
+  <div class="modal" id="modalCreditos">
+    <div class="caixa">
 
-    <div class="conteudo-creditos">
-      <b><h3>Gestora:</h3></b>
-      <p>Letícia Veras</p>
-      <p><b><h3>Design:</h3></b></p>
-      <p>Larinete Xavier</p>
-      <p><b><h3>Programadores:</h3></b></p>
-      <p>Caick Ruan, Pedro Sérgio</p>
+      <div class="conteudo-creditos">
+        <b>
+          <h3>Gestora:</h3>
+        </b>
+        <p>Letícia Veras</p>
+        <p><b>
+            <h3>Design:</h3>
+          </b></p>
+        <p>Larinete Xavier</p>
+        <p><b>
+            <h3>Programadores:</h3>
+          </b></p>
+        <p>Caick Ruan, Pedro Sérgio</p>
+      </div>
+
+      <button class="btn-sec" id="fecharCreditos">Fechar</button>
+
     </div>
-
-    <button class="btn-sec" id="fecharCreditos">Fechar</button>
-
   </div>
-</div>
 
 
   <!-- Controles da página -->
@@ -321,7 +376,7 @@
       });
     });
 
-        // 🔊 Garante que a música começa na PRIMEIRA interação do usuário
+    // 🔊 Garante que a música começa na PRIMEIRA interação do usuário
     function iniciarMusicaAoInteragir() {
       if (!audio) return;
 
@@ -392,4 +447,5 @@
   </script>
 
 </body>
+
 </html>

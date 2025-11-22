@@ -91,10 +91,6 @@ body {
   height: 1200px;
   top: -100px;
 
-  background-image: url('images/MP.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,12 +101,27 @@ body {
   margin-bottom: 20px;
 
   border-radius: 20px;
+  /* removemos o background daqui */
 }
+
+.personagens::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* cobre toda a área do container */
+  background-image: url('images/MP.png');
+  background-repeat: no-repeat;
+  background-size: 1900px 1050px; /* pode trocar para contain ou valores fixos */
+  background-position: center; /* reposiciona a imagem */
+  top: -300px; /* ajusta a posição vertical */
+  border-radius: 20px;
+  z-index: -1; /* fica atrás dos cards */
+}
+
 
 
 /* ====== CARDS DE PERSONAGENS ====== */
 .card-personagem {
-  transform: translateY(-130px); /* sobe o personagem */
+  transform: translateY(-60px); /* sobe o personagem */
   background: url('images/moldura.png') no-repeat center center;
   background-size: contain;
   width: 350px;
