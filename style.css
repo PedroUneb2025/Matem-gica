@@ -146,7 +146,7 @@ body {
 
 .card-personagem.selecionado {
   border: 3px solid #ffcc00;
-  box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+  box-shadow: 0 0 15px rgba(18, 165, 233, 0.8);
   transform: scale(1.08);
 }
 
@@ -173,12 +173,17 @@ body {
   margin: 0;
 }
 
+@keyframes brilho {
+  0% { transform: scale(1) ; }
+  50% {transform: scale(1.2) ;}
+  100% { transform: scale(1); }
+}
 
 /* ====== BOTÃO COMEÇAR ====== */
 .btn-comecar {
   position: fixed;
   bottom: 60px;   /* distância do rodapé */
-  left: 50%;
+  left: 44%;
   transform: translateX(-50%);
   z-index: 9999;  /* sempre na frente */
   margin-top: 10px;
@@ -204,13 +209,20 @@ body {
   text-shadow: 2px 2px 4px #000; /* sombra para destacar */
   border-radius: 20px;
 
-  transition: transform 0.2s;
+  animation: brilho 2s infinite;
 }
 
-
-
+.btn-comecar::before :not(:disabled) {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border-radius: 20px;
+  animation: aura 2s infinite;
+  z-index: -1; /* fica atrás da imagem */
+}
 .btn-comecar:disabled {
-  background-image: url('images/botao-desativado.png'); /* opcional: outra imagem */
+  background-image: url('images/botaopb.png'); /* opcional: outra imagem */
   color: #ccc;
   text-shadow: none;
   cursor: not-allowed;
@@ -276,8 +288,8 @@ body {
   position: relative;
   background-image: url('images/MAPA.png');
   background-size: 100% 100%;
-  height: 1130px;
-  width: 2100px;
+  height: 1060px;
+  width: 1930px;
   top: -250px;
 }
 
